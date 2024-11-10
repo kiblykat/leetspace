@@ -14,8 +14,8 @@ export const getQuestion = async (req, res) => {
 // Create a new question
 export const createQuestion = async (req, res) => {
   try {
-    const { title, description, difficulty, tags } = req.body;
-    const newQuestion = new Question({ title, description, difficulty, tags });
+    const { title, description, difficulty, topic } = req.body;
+    const newQuestion = new Question({ title, description, difficulty, topic });
     await newQuestion.save();
     res.status(201).json(newQuestion);
   } catch (error) {
