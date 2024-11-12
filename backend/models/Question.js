@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const QuestionSchema = new mongoose.Schema({
   title: { type: String, required: true },
   link: { type: String, required: true },
-  notes: { type: String, required: true },
+  notes: { type: String, default: "" },
   difficulty: {
     type: String,
     required: true,

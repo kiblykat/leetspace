@@ -14,8 +14,9 @@ export const getQuestion = async (req, res) => {
 // Create a new question
 export const createQuestion = async (req, res) => {
   try {
-    const { title, description, difficulty, topic } = req.body;
-    const newQuestion = new Question({ title, description, difficulty, topic });
+    const { title, link, notes, difficulty, topic } = req.body;
+    //todo: +1 times completed everytime question is done
+    const newQuestion = new Question({ title, link, notes, difficulty, topic });
     await newQuestion.save();
     res.status(201).json(newQuestion);
   } catch (error) {
