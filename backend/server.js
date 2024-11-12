@@ -4,10 +4,11 @@ import connectDB from "./config/db.js";
 import questionRoutes from "./routes/questionRoutes.js";
 
 dotenv.config();
-connectDB();
+connectDB(); //connect to mongoDB database
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // Question routes
 app.use("/api/questions", questionRoutes);
