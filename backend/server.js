@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import questionRoutes from "./routes/questionRoutes.js";
+import cors from "cors";
 
 dotenv.config();
 connectDB(); //connect to mongoDB database
