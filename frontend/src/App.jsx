@@ -5,15 +5,21 @@ import "./App.css";
 function App() {
   const questionCtx = useContext(QuestionContext);
 
-  const { questions, setQuestions, loading, setLoading, fetchQuestions } =
-    questionCtx;
+  const {
+    // questions,
+    // setQuestions,
+    // loading,
+    // setLoading,
+    handleSubmit,
+    fetchQuestions,
+  } = questionCtx;
 
   return (
     <div className="App">
       <button className="btn m-2" onClick={fetchQuestions}>
         getQuestions
       </button>
-      <div className="flex-col align-bottom justify-start">
+      <form className="flex-col align-bottom justify-start">
         <div>
           <label>title</label>
           <input></input>
@@ -38,7 +44,10 @@ function App() {
           <label>tags</label>
           <input></input>
         </div>
-      </div>
+      </form>
+      <button type="submit" onClick={handleSubmit} className="btn m-2">
+        submit
+      </button>
     </div>
   );
 }

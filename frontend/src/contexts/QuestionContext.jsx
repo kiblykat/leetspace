@@ -8,6 +8,9 @@ export function QuestionProvider({ children }) {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  //question states
+  const [title, setTitle] = useState("");
+
   async function fetchQuestions() {
     setLoading(true);
     try {
@@ -19,12 +22,34 @@ export function QuestionProvider({ children }) {
     setLoading(false);
   }
 
+  const handleSubmit = async (title, link, notes, difficulty, topic, tags) => {
+    //check if new question: if condition
+    //if question has been done before: else condition
+    let newQuestion = {
+      title: title,
+      link: link,
+      notes: notes,
+      difficulty: difficulty,
+      topic: topic,
+      tags: tags,
+    };
+    try {
+      await questionApi.post("/api/questions", newQuestion);
+    } catch (err) {
+      console.log(err);
+    }
+    return;
+  };
+
   let context = {
     questions,
     setQuestions,
     loading,
     setLoading,
     fetchQuestions,
+    title,
+    setTitle,
+    handleSubmit,
   };
 
   return (
