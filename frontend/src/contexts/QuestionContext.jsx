@@ -22,6 +22,21 @@ export function QuestionProvider({ children }) {
     setLoading(false);
   }
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleTopicSelect = (topic) => {
+    setFormData({
+      ...formData,
+      topic, // update the topic field in formData
+    });
+  };
+
   const handleSubmit = async (title, link, notes, difficulty, topic, tags) => {
     //check if new question: if condition
     //if question has been done before: else condition
@@ -50,6 +65,8 @@ export function QuestionProvider({ children }) {
     title,
     setTitle,
     handleSubmit,
+    handleChange,
+    handleTopicSelect,
   };
 
   return (
