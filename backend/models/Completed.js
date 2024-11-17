@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const QuestionSchema = new mongoose.Schema({
+const completedSchema = new mongoose.Schema({
   title: { type: String, required: true },
   link: { type: String, required: true },
   notes: { type: String, default: "" },
@@ -44,4 +44,4 @@ const QuestionSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("Question", QuestionSchema);
+export const completedModel = mongoose.model("Completed", completedSchema);
