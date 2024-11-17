@@ -1,4 +1,4 @@
-import { completedModel } from "../models/completedModel.js";
+import { completedModel } from "../models/Completed.js";
 
 // Get a question by ID
 export const getQuestion = async (req, res) => {

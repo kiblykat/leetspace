@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
-import questionRoutes from "./routes/questionRoutes.js";
+import completedRoutes from "./routes/completedRoutes.js";
 import cors from "cors";
 
 dotenv.config();
@@ -11,8 +11,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Question routes
-app.use("/api/questions", questionRoutes);
+// completed routes
+app.use("/api/", completedRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
