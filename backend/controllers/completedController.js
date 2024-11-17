@@ -24,8 +24,8 @@ export const createCompleted = async (req, res) => {
       difficulty,
       topic,
     });
-    await newCompleted.save();
-    res.status(201).json(newCompleted);
+    let savedCompleted = await completedModel.create(newCompleted);
+    res.status(201).json(savedCompleted);
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
