@@ -8,7 +8,7 @@ export const getCompleted = async (req, res) => {
       return res.status(404).json({ error: "completedModel not found" });
     res.json(completed);
   } catch (error) {
-    res.status(500).json({ error: "Server Error" });
+    res.status(500).json({ error: error });
   }
 };
 
@@ -23,11 +23,14 @@ export const createCompleted = async (req, res) => {
       notes,
       difficulty,
       topic,
+      createdDate: Date.now(),
+      reviewDate: Date.now(),
+      timesReviewed: 0,
     });
     let savedCompleted = await completedModel.create(newCompleted);
     res.status(201).json(savedCompleted);
   } catch (error) {
-    res.status(500).json({ error: "Server Error" });
+    res.status(500).json({ error: error });
   }
 };
 
@@ -37,7 +40,7 @@ export const getAllCompleteds = async (req, res) => {
     const completeds = await completedModel.find();
     res.json(completeds);
   } catch (error) {
-    res.status(500).json({ error: "Server Error" });
+    res.status(500).json({ error: error });
   }
 };
 
@@ -53,7 +56,7 @@ export const updateCompleted = async (req, res) => {
       return res.status(404).json({ error: "completedModel not found" });
     res.json(updatedCompleted);
   } catch (error) {
-    res.status(500).json({ error: "Server Error" });
+    res.status(500).json({ error: error });
   }
 };
 
@@ -67,6 +70,6 @@ export const deleteCompleted = async (req, res) => {
       return res.status(404).json({ error: "completedModel not found" });
     res.json({ message: "completedModel deleted successfully" });
   } catch (error) {
-    res.status(500).json({ error: "Server Error" });
+    res.status(500).json({ error: error });
   }
 };

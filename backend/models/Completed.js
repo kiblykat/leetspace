@@ -42,6 +42,10 @@ const completedSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  timesReviewed: {
+    type: Number,
+    required: true,
+  },
 });
 
 export const completedModel = mongoose.model("Completed", completedSchema);
