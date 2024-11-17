@@ -17,6 +17,6 @@ let leetcode_dbSchema = new mongoose.Schema({
 });
 
 export const leetcode_dbModel = mongoose.model(
-  "leetcode_db",
+  "Leetcode_db",
   leetcode_dbSchema
 );
