@@ -1,18 +1,18 @@
 import express from "express";
 import {
-  getQuestion,
-  createQuestion,
-  getAllQuestions,
-  updateQuestion,
-  deleteQuestion,
+  getCompleted,
+  createCompleted,
+  getAllCompleteds,
+  updateCompleted,
+  deleteCompleted,
 } from "../controllers/completedController.js";
 
 const router = express.Router();
 
-router.get("/", getAllQuestions);
-router.get("/:id", getQuestion);
-router.post("/", createQuestion);
-router.put("/:id", updateQuestion);
-router.delete("/:id", deleteQuestion);
+router.get("/", getAllCompleteds);
+router.get("/:id", getCompleted);
+router.post("/", createCompleted);
+router.put("/:id", updateCompleted);
+router.delete("/:id", deleteCompleted);
 
 export default router;

@@ -1,22 +1,22 @@
 import { completedModel } from "../models/Completed.js";
 
-// Get a question by ID
-export const getQuestion = async (req, res) => {
+// Get a completed by ID
+export const getCompleted = async (req, res) => {
   try {
-    const question = await completedModel.findById(req.params.id);
-    if (!question)
+    const completed = await completedModel.findById(req.params.id);
+    if (!completed)
       return res.status(404).json({ error: "completedModel not found" });
-    res.json(question);
+    res.json(completed);
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
 };
 
-// Create a new question
-export const createQuestion = async (req, res) => {
+// Create a new completed
+export const createCompleted = async (req, res) => {
   try {
     const { title, link, notes, difficulty, topic } = req.body;
-    //todo: +1 times completed everytime question is done
+    //todo: +1 times completed everytime completed is done
     const newCompleted = new completedModel({
       title,
       link,
@@ -31,39 +31,39 @@ export const createQuestion = async (req, res) => {
   }
 };
 
-// Get all questions
-export const getAllQuestions = async (req, res) => {
+// Get all completeds
+export const getAllCompleteds = async (req, res) => {
   try {
-    const questions = await completedModel.find();
-    res.json(questions);
+    const completeds = await completedModel.find();
+    res.json(completeds);
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
 };
 
-// Update a question
-export const updateQuestion = async (req, res) => {
+// Update a completed
+export const updateCompleted = async (req, res) => {
   try {
-    const updatedQuestion = await completedModel.findByIdAndUpdate(
+    const updatedCompleted = await completedModel.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     );
-    if (!updatedQuestion)
+    if (!updatedCompleted)
       return res.status(404).json({ error: "completedModel not found" });
-    res.json(updatedQuestion);
+    res.json(updatedCompleted);
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
 };
 
-// Delete a question
-export const deleteQuestion = async (req, res) => {
+// Delete a completed
+export const deleteCompleted = async (req, res) => {
   try {
-    const deletedQuestion = await completedModel.findByIdAndDelete(
+    const deletedCompleted = await completedModel.findByIdAndDelete(
       req.params.id
     );
-    if (!deletedQuestion)
+    if (!deletedCompleted)
       return res.status(404).json({ error: "completedModel not found" });
     res.json({ message: "completedModel deleted successfully" });
   } catch (error) {
