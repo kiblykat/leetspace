@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-let databaseSchema = new mongoose.Schema({
+let leetcode_dbSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId, // MongoDB ObjectId
   Question_No: { type: Number, required: true },
   Question: { type: String, required: true },
@@ -16,4 +16,7 @@ let databaseSchema = new mongoose.Schema({
   Solution: { type: String, required: true },
 });
 
-export const databaseModel = mongoose.model("leetcode_db", databaseSchema);
+export const leetcode_dbModel = mongoose.model(
+  "leetcode_db",
+  leetcode_dbSchema
+);
