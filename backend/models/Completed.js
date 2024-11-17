@@ -46,6 +46,11 @@ const completedSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  //this tracks how long before next revisit. difficulty multiplier applies to this val
+  currentInterval: {
+    type: Number,
+    default: 1,
+  },
 });
 
 export const completedModel = mongoose.model("Completed", completedSchema);
