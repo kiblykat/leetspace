@@ -49,7 +49,16 @@ const completedSchema = new mongoose.Schema({
   //this tracks how long before next revisit. difficulty multiplier applies to this val
   currentInterval: {
     type: Number,
-    default: 1,
+    default: function () {
+      switch (this.difficulty) {
+        case "easy":
+          return 1;
+        case "medium":
+          return 3;
+        case "hard":
+          return 6;
+      }
+    },
   },
 });
 
