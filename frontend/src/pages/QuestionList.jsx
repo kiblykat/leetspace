@@ -14,14 +14,51 @@ const QuestionList = () => {
   };
   return (
     <>
-      <button onClick={getDueQuestions}>
-        Click me to refresh due question
-      </button>
-      {dueQuestions.map((dueQuestion) => (
-        <ul key={dueQuestion._id}>
-          <li>{dueQuestion.title}</li>
-        </ul>
-      ))}
+      <div className="flex align-middle justify-center">
+        <button className="btn" onClick={getDueQuestions}>
+          Click me to refresh due question
+        </button>
+      </div>
+      <table className="table table-zebra w-full">
+        {/* Table Head */}
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>LeetCode Link</th>
+            <th>Last Reviewed</th>
+            <th>Topic</th>
+            <th>Difficulty</th>
+          </tr>
+        </thead>
+        {/* Table Body */}
+        <tbody>
+          {dueQuestions.map((dueQuestion, index) => (
+            <tr key={dueQuestion._id}>
+              <th>{index + 1}</th>
+              <td>{dueQuestion.title}</td>
+              <td>
+                <a
+                  href={dueQuestion.leetcode_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline"
+                >
+                  {dueQuestion.link}
+                </a>
+              </td>
+              <td>
+                {dueQuestion.reviewDate.slice(
+                  0,
+                  dueQuestion.reviewDate.indexOf("T")
+                )}
+              </td>
+              <td>{dueQuestion.topic}</td>
+              <td>{dueQuestion.difficulty}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };
