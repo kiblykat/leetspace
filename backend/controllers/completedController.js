@@ -12,6 +12,22 @@ export const getCompleted = async (req, res) => {
   }
 };
 
+export const getDueCompleteds = async (req, res) => {
+  try {
+    const today = new Date(); //get Current Date
+    const dueQuestions = await completedModel
+      .find({
+        reviewDate: { $lte: today },
+      })
+      .sort({ reviewDate: asc })
+      .limit(2);
+
+    res.json(dueQuestions);
+  } catch (err) {
+    res.status(500).json({ err: err });
+  }
+};
+
 // Create a new completed
 export const createCompleted = async (req, res) => {
   try {
