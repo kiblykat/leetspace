@@ -19,12 +19,12 @@ export const getDueCompleteds = async (req, res) => {
       .find({
         reviewDate: { $lte: today },
       })
-      .sort({ reviewDate: asc })
+      .sort({ reviewDate: 1 })
       .limit(2);
 
     res.json(dueQuestions);
-  } catch (err) {
-    res.status(500).json({ err: err });
+  } catch (error) {
+    res.status(500).json({ error: error });
   }
 };
 
