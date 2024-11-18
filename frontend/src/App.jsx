@@ -4,7 +4,7 @@ import QuestionList from "./pages/QuestionList";
 function App() {
   return (
     <>
-      <NewQuestion />;
+      <NewQuestion />
       <QuestionList />
     </>
   );

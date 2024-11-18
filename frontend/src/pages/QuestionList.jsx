@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import questionApi from "../api/api";
 
 const QuestionList = () => {
@@ -8,22 +7,21 @@ const QuestionList = () => {
     try {
       const response = await questionApi.get("api/completed/due");
       console.log(response);
-      setDueQuestions(response.data.title);
+      setDueQuestions(response.data);
     } catch (err) {
-      console.log("error occured");
+      console.log(err);
     }
   };
-  setDueQuestions;
   return (
     <>
       <button onClick={getDueQuestions}>
         Click me to refresh due question
       </button>
-      {/* <ul>
-        {dueQuestions.map((dueQuestion) => {
-          <li>{dueQuestion.title}</li>;
-        })}
-      </ul> */}
+      {dueQuestions.map((dueQuestion) => (
+        <ul key={dueQuestion._id}>
+          <li>{dueQuestion.title}</li>
+        </ul>
+      ))}
     </>
   );
 };
