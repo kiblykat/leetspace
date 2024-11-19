@@ -18,8 +18,8 @@ export const getMatchingLeets = async (req, res) => {
 
     // Use a case-insensitive regex to find partial matches in the 'Question' field
     const response = await leetcode_dbModel.find({
-      Question: { $regex: value, $options: "i" },
-    });
+      Question: { $regex: value, $options: "i" }
+    }).limit(5);
 
     // Log the response for debugging
     // console.log(`Matching questions: ${response}`);
