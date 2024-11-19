@@ -5,6 +5,9 @@ import questionApi from "../api/api";
 const NewQuestion = () => {
   const questionCtx = useContext(QuestionContext);
 
+  function addNewQn(){
+    return
+  }
   const {
     // questions,
     // setQuestions,
@@ -21,7 +24,7 @@ const NewQuestion = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">LeetCode Tracker</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">LeetCode ANKI</h1>
 
       <form
         className="flex flex-col bg-base-200 p-6 rounded shadow-lg"
@@ -42,49 +45,23 @@ const NewQuestion = () => {
           >
             Find Question
           </button> */}
-          <table className="table table-zebra w-full">
+          <table className="table table-auto w-full">
             <th>Title</th>
+            <th>Difficulty</th>
+            <th>Tags</th>
             <tbody>
               {console.log(foundQuestions)}
               {foundQuestions?.map((foundQn) => (
-                <tr key={foundQn.Question}>
+                <tr key={foundQn.Question}  className="hover:bg-gray-100 cursor-pointer" onClick={addNewQn}>
                   <td>{foundQn.Question}</td>
+                  <td>{foundQn.Difficulty}</td>
+                  <td>{foundQn.Topic_tags}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        <div className="form-control mt-4">
-          <label className="label">Link</label>
-          <input
-            type="url"
-            name="link"
-            className="input input-bordered"
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-control mt-4">
-          <label className="label">Notes</label>
-          <input
-            type="text"
-            name="notes"
-            className="input input-bordered"
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="form-control mt-4">
-          <label className="label">Difficulty</label>
-          <input
-            type="text"
-            name="difficulty"
-            className="input input-bordered"
-            onChange={handleChange}
-          />
-        </div>
 
         <div className="dropdown mt-4">
           <div tabIndex={0} role="button" className="btn m-1">
@@ -121,15 +98,6 @@ const NewQuestion = () => {
           </ul>
         </div>
 
-        <div className="form-control mt-4">
-          <label className="label">Tags</label>
-          <input
-            type="text"
-            name="tags"
-            className="input input-bordered"
-            onChange={handleChange}
-          />
-        </div>
 
         <button type="submit" className="btn btn-primary mt-6">
           Submit
