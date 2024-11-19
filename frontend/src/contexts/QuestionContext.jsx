@@ -7,11 +7,13 @@ let QuestionContext = createContext();
 export function QuestionProvider({ children }) {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({});
+  const [foundQuestions, setFoundQuestions] = useState([]);
 
   //question states
   const [title, setTitle] = useState("");
 
-  async function fetchQuestions() {
+  async function getAllQuestions() {
     setLoading(true);
     try {
       const response = await questionApi.get("/api/questions");
@@ -22,12 +24,21 @@ export function QuestionProvider({ children }) {
     setLoading(false);
   }
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
+    if (name === "title") {
+      const response = await questionApi.post(
+        "/api/leetcode_db/find-matching",
+        {
+          value,
+        }
+      );
+      setFoundQuestions(response.data);
+    }
   };
 
   const handleTopicSelect = (topic) => {
@@ -61,12 +72,14 @@ export function QuestionProvider({ children }) {
     setQuestions,
     loading,
     setLoading,
-    fetchQuestions,
+    getAllQuestions,
     title,
     setTitle,
     handleSubmit,
     handleChange,
     handleTopicSelect,
+    foundQuestions,
+    setFoundQuestions,
   };
 
   return (

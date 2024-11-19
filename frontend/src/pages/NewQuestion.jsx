@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import QuestionContext from "../contexts/QuestionContext";
+import questionApi from "../api/api";
 
 const NewQuestion = () => {
   const questionCtx = useContext(QuestionContext);
@@ -10,10 +11,12 @@ const NewQuestion = () => {
     // loading,
     // setLoading,
     handleSubmit,
-    // fetchQuestions,
+    // getAllQuestions,
     handleChange,
-    // formData,
+    formData,
     handleTopicSelect,
+    foundQuestions,
+    setFoundQuestions,
   } = questionCtx;
 
   return (
@@ -33,6 +36,23 @@ const NewQuestion = () => {
             onChange={handleChange}
             required
           />
+          {/* <button
+            className="btn"
+            onClick={() => getMatchingLeets(foundQuestions)}
+          >
+            Find Question
+          </button> */}
+          <table className="table table-zebra w-full">
+            <th>Title</th>
+            <tbody>
+              {console.log(foundQuestions)}
+              {foundQuestions?.map((foundQn) => (
+                <tr key={foundQn.Question}>
+                  <td>{foundQn.Question}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         <div className="form-control mt-4">
