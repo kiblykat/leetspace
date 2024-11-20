@@ -13,7 +13,7 @@ const QuestionList = () => {
     }
   };
   return (
-    <>
+    <div className="container mx-auto p-6">
       <div className="flex align-middle justify-center">
         <button className="btn" onClick={getDueQuestions}>
           Click me to refresh due question
@@ -59,7 +59,7 @@ const QuestionList = () => {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 
