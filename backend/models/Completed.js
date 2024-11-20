@@ -32,7 +32,7 @@ const completedSchema = new mongoose.Schema({
       "Math & Geometry",
     ],
   },
-  tags: { type: [String], default: [] },
+  tags: { type: String, default: "[]" },
   createdDate: {
     type: Date,
     required: true,
