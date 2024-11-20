@@ -31,12 +31,11 @@ export const getDueCompleteds = async (req, res) => {
 // Create a new completed
 export const createCompleted = async (req, res) => {
   try {
-    const { title, link, notes, difficulty, topic } = req.body;
+    const { title, link, topic, difficulty } = req.body;
     //todo: +1 times completed everytime completed is done
     const newCompleted = new completedModel({
       title,
       link,
-      notes,
       difficulty,
       topic,
       createdDate: Date.now(),

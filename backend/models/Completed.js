@@ -7,11 +7,10 @@ const completedSchema = new mongoose.Schema({
   difficulty: {
     type: String,
     required: true,
-    enum: ["easy", "medium", "hard"],
+    enum: ["Easy", "Medium", "Hard"],
   },
   topic: {
     type: String,
-    required: true,
     enum: [
       "Arrays and Hashing",
       "Two Pointers",

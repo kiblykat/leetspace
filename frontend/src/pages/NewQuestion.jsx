@@ -5,8 +5,14 @@ import questionApi from "../api/api";
 const NewQuestion = () => {
   const questionCtx = useContext(QuestionContext);
 
-  function addNewQn(){
-    console.log("addNewQn called")
+  const addNewQn = async (question,question_link,topic_tags,difficulty) => {
+    try{
+      let newQuestion = {title:question,link:question_link,tags:topic_tags,difficulty:difficulty} 
+      let response = await questionApi.post('/api/completed', newQuestion)
+      console.log(response)
+    }catch(err){
+      console.log(err)
+    }
   }
   const {
     // questions,
@@ -16,10 +22,7 @@ const NewQuestion = () => {
     handleSubmit,
     // getAllQuestions,
     handleChange,
-    formData,
-    handleTopicSelect,
     foundQuestions,
-    setFoundQuestions,
   } = questionCtx;
 
   return (
@@ -46,7 +49,7 @@ const NewQuestion = () => {
             <tbody>
               {console.log(foundQuestions)}
               {foundQuestions?.map((foundQn) => (
-                <tr key={foundQn.Question}  className="hover:bg-gray-100 cursor-pointer" onClick={addNewQn}>
+                <tr key={foundQn.Question}  className="hover:bg-gray-100 cursor-pointer" onClick={()=>addNewQn(foundQn.Question, foundQn.Question_Link, foundQn.Topic_tags, foundQn.Difficulty)}>
                   <td>{foundQn.Question}</td>
                   <td>{foundQn.Difficulty}</td>
                   <td>{foundQn.Topic_tags}</td>
