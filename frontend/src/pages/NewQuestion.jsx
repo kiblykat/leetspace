@@ -72,7 +72,7 @@ const NewQuestion = () => {
                 >
                   <td>{foundLeet.Question}</td>
                   <td>{foundLeet.Difficulty}</td>
-                  <td>{foundLeet.Topic_tags}</td>
+                  <td>{foundLeet.Topic_tags.replace(/[[\]']/g, "")}</td>
                 </tr>
               ))}
             </tbody>

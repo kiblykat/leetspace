@@ -52,7 +52,7 @@ const QuestionList = () => {
                   dueQuestion.reviewDate.indexOf("T")
                 )}
               </td>
-              <td>{dueQuestion.tags}</td>
+              <td>{dueQuestion.tags.replace(/[[\]']/g, "")}</td>
               <td>{dueQuestion.difficulty}</td>
             </tr>
           ))}
