@@ -22,7 +22,7 @@ export const getDueCompleteds = async (req, res) => {
       .sort({ reviewDate: 1 })
       .limit(2);
 
-    res.json(dueQuestions);
+    res.status(200).json(dueQuestions);
   } catch (error) {
     res.status(500).json({ error: error });
   }
@@ -31,13 +31,13 @@ export const getDueCompleteds = async (req, res) => {
 // Create a new completed
 export const createCompleted = async (req, res) => {
   try {
-    const { title, link, topic, difficulty } = req.body;
+    const { title, link, tags, difficulty } = req.body;
     //todo: +1 times completed everytime completed is done
     const newCompleted = new completedModel({
       title,
       link,
       difficulty,
-      topic,
+      tags,
       createdDate: Date.now(),
       reviewDate: Date.now(),
       timesReviewed: 0,

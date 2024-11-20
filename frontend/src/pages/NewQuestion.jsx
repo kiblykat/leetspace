@@ -1,19 +1,29 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import QuestionContext from "../contexts/QuestionContext";
 import questionApi from "../api/api";
 
 const NewQuestion = () => {
   const questionCtx = useContext(QuestionContext);
 
-  const addNewQn = async (question,question_link,topic_tags,difficulty) => {
-    try{
-      let newQuestion = {title:question,link:question_link,tags:topic_tags,difficulty:difficulty} 
-      let response = await questionApi.post('/api/completed', newQuestion)
-      console.log(response)
-    }catch(err){
-      console.log(err)
+  const addNewQn = async (question, question_link, topic_tags, difficulty) => {
+    try {
+      let newQuestion = {
+        title: question,
+        link: question_link,
+        tags: topic_tags,
+        difficulty: difficulty,
+      };
+      console.log(
+        `topic_tags is ${
+          newQuestion.tags
+        }, typeof topic_tags is ${typeof newQuestion.tags}`
+      );
+      let response = await questionApi.post("/api/completed", newQuestion);
+      console.log(`response is ${JSON.stringify(response.data)}`);
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
   const {
     // questions,
     // setQuestions,
@@ -22,7 +32,7 @@ const NewQuestion = () => {
     handleSubmit,
     // getAllQuestions,
     handleChange,
-    foundQuestions,
+    foundLeets,
   } = questionCtx;
 
   return (
@@ -47,12 +57,22 @@ const NewQuestion = () => {
             <th>Difficulty</th>
             <th>Tags</th>
             <tbody>
-              {console.log(foundQuestions)}
-              {foundQuestions?.map((foundQn) => (
-                <tr key={foundQn.Question}  className="hover:bg-gray-100 cursor-pointer" onClick={()=>addNewQn(foundQn.Question, foundQn.Question_Link, foundQn.Topic_tags, foundQn.Difficulty)}>
-                  <td>{foundQn.Question}</td>
-                  <td>{foundQn.Difficulty}</td>
-                  <td>{foundQn.Topic_tags}</td>
+              {foundLeets?.map((foundLeet) => (
+                <tr
+                  key={foundLeet.Question}
+                  className="hover:bg-gray-100 cursor-pointer"
+                  onClick={() =>
+                    addNewQn(
+                      foundLeet.Question,
+                      foundLeet.Question_Link,
+                      foundLeet.Topic_tags,
+                      foundLeet.Difficulty
+                    )
+                  }
+                >
+                  <td>{foundLeet.Question}</td>
+                  <td>{foundLeet.Difficulty}</td>
+                  <td>{foundLeet.Topic_tags}</td>
                 </tr>
               ))}
             </tbody>

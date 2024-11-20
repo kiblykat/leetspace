@@ -8,7 +8,7 @@ export function QuestionProvider({ children }) {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({});
-  const [foundQuestions, setFoundQuestions] = useState([]);
+  const [foundLeets, setFoundLeets] = useState([]);
 
   //question states
   const [title, setTitle] = useState("");
@@ -37,7 +37,7 @@ export function QuestionProvider({ children }) {
           value,
         }
       );
-      setFoundQuestions(response.data);
+      setFoundLeets(response.data);
     }
   };
 
@@ -78,8 +78,8 @@ export function QuestionProvider({ children }) {
     handleSubmit,
     handleChange,
     handleTopicSelect,
-    foundQuestions,
-    setFoundQuestions,
+    foundLeets,
+    setFoundLeets,
   };
 
   return (

@@ -6,7 +6,6 @@ const QuestionList = () => {
   const getDueQuestions = async () => {
     try {
       const response = await questionApi.get("api/completed/due");
-      console.log(response);
       setDueQuestions(response.data);
     } catch (err) {
       console.log(err);
@@ -27,7 +26,7 @@ const QuestionList = () => {
             <th>Title</th>
             <th>LeetCode Link</th>
             <th>Last Reviewed</th>
-            <th>Topic</th>
+            <th>Tags</th>
             <th>Difficulty</th>
           </tr>
         </thead>
@@ -53,7 +52,7 @@ const QuestionList = () => {
                   dueQuestion.reviewDate.indexOf("T")
                 )}
               </td>
-              <td>{dueQuestion.topic}</td>
+              <td>{dueQuestion.tags}</td>
               <td>{dueQuestion.difficulty}</td>
             </tr>
           ))}
