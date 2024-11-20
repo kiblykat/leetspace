@@ -15,7 +15,7 @@ const QuestionList = () => {
     <div className="container mx-auto p-6">
       <div className="flex align-middle justify-center">
         <button className="btn" onClick={getDueQuestions}>
-          Click me to refresh due question
+          Refresh Questions due for Revision
         </button>
       </div>
       <table className="table table-zebra w-full">
@@ -36,14 +36,14 @@ const QuestionList = () => {
             <tr key={dueQuestion._id}>
               <th>{index + 1}</th>
               <td>{dueQuestion.title}</td>
-              <td>
+              <td className="btn-ghost">
                 <a
-                  href={dueQuestion.leetcode_link}
+                  href={dueQuestion.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500 underline"
                 >
-                  {dueQuestion.link}
+                  Review Problem
                 </a>
               </td>
               <td>
