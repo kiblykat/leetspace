@@ -11,20 +11,27 @@ const QuestionList = () => {
       console.log(err);
     }
   };
+
+  const revisedQuestion = async (title, link) => {
+    try {
+      window.open(link, "_blank");
+    } catch (err) {
+      console.error("Failed to open the link:", err.message);
+    }
+  };
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-6 bg-base-200 rounded shadow-lg">
       <div className="flex align-middle justify-center">
         <button className="btn" onClick={getDueQuestions}>
           Refresh Questions due for Revision
         </button>
       </div>
-      <table className="table table-zebra w-full">
+      <table className="table table-auto w-full">
         {/* Table Head */}
         <thead>
           <tr>
             <th>#</th>
             <th>Title</th>
-            <th>LeetCode Link</th>
             <th>Last Reviewed</th>
             <th>Tags</th>
             <th>Difficulty</th>
@@ -33,19 +40,15 @@ const QuestionList = () => {
         {/* Table Body */}
         <tbody>
           {dueQuestions.map((dueQuestion, index) => (
-            <tr key={dueQuestion._id}>
+            <tr
+              key={dueQuestion._id}
+              className="btn-ghost cursor-pointer"
+              onClick={() =>
+                revisedQuestion(dueQuestion.title, dueQuestion.link)
+              }
+            >
               <th>{index + 1}</th>
               <td>{dueQuestion.title}</td>
-              <td className="btn-ghost">
-                <a
-                  href={dueQuestion.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 underline"
-                >
-                  Review Problem
-                </a>
-              </td>
               <td>
                 {dueQuestion.reviewDate.slice(
                   0,

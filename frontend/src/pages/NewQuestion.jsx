@@ -38,13 +38,15 @@ const NewQuestion = () => {
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6 text-center">LeetCode ANKI</h1>
-
+      <p className="text-center mb-3">
+        This App applies spaced repetition to leetcode problems similar to ANKI
+      </p>
       <form
         className="flex flex-col bg-base-200 p-6 rounded shadow-lg"
         onSubmit={handleSubmit}
       >
         <div className="form-control">
-          <label className="label">Find Question</label>
+          <label className="label">Search for Leetcode Questions:</label>
           <input
             type="text"
             name="title"
@@ -60,7 +62,7 @@ const NewQuestion = () => {
               {foundLeets?.map((foundLeet) => (
                 <tr
                   key={foundLeet.Question}
-                  className="hover:bg-gray-100 cursor-pointer"
+                  className="hover:bg-gray-800 cursor-pointer"
                   onClick={() =>
                     addNewQn(
                       foundLeet.Question,
