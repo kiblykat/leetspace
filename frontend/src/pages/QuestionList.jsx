@@ -12,9 +12,16 @@ const QuestionList = () => {
     }
   };
 
-  const revisedQuestion = async (title, link) => {
+  const openQuestionLink = async (title, link) => {
     try {
       window.open(link, "_blank");
+    } catch (err) {
+      console.error("Failed to open the link:", err.message);
+    }
+  };
+  const revisedQuestion = async (title) => {
+    try {
+      console.log("revised" + title);
     } catch (err) {
       console.error("Failed to open the link:", err.message);
     }
@@ -37,6 +44,7 @@ const QuestionList = () => {
               <th>Last Reviewed</th>
               <th>Tags</th>
               <th>Difficulty</th>
+              <th className="text-center">Revised</th>
             </tr>
           </thead>
           {/* Table Body */}
@@ -44,9 +52,9 @@ const QuestionList = () => {
             {dueQuestions.map((dueQuestion, index) => (
               <tr
                 key={dueQuestion._id}
-                className="btn-ghost cursor-pointer"
+                className="hover:bg-base-300 btn-ghost cursor-pointer z-10"
                 onClick={() =>
-                  revisedQuestion(dueQuestion.title, dueQuestion.link)
+                  openQuestionLink(dueQuestion.title, dueQuestion.link)
                 }
               >
                 <th>{index + 1}</th>
@@ -59,6 +67,16 @@ const QuestionList = () => {
                 </td>
                 <td>{dueQuestion.tags.replace(/[[\]']/g, "")}</td>
                 <td>{dueQuestion.difficulty}</td>
+                <td
+                  className="text-center text-xl z-20 hover:bg-green-100"
+                  data-tooltip="Mark as Revised"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    revisedQuestion(dueQuestion.title);
+                  }}
+                >
+                  ✅
+                </td>
               </tr>
             ))}
           </tbody>
