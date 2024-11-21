@@ -62,10 +62,10 @@ export const getAllCompleteds = async (req, res) => {
 // Update a completed
 export const updateCompleted = async (req, res) => {
   try {
-    const updatedCompleted = await completedModel.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
+    const { id, reviewDate } = req.body;
+    const updatedCompleted = await completedModel.updateOne(
+      { _id: id },
+      { $set: { reviewDate } }
     );
     if (!updatedCompleted)
       return res.status(404).json({ error: "completedModel not found" });

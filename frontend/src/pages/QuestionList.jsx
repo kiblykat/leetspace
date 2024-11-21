@@ -22,9 +22,10 @@ const QuestionList = () => {
       console.error("Failed to open the link:", err.message);
     }
   };
-  const revisedQuestion = async (title) => {
+  const revisedQuestion = async (id, reviewDate) => {
     try {
-      console.log("revised" + title);
+      let updatedDate = { id, reviewDate };
+      await questionApi.patch("/api/completed", updatedDate);
     } catch (err) {
       console.error("Failed to open the link:", err.message);
     }
@@ -76,7 +77,7 @@ const QuestionList = () => {
                   data-tooltip="Mark as Revised"
                   onClick={(e) => {
                     e.stopPropagation();
-                    revisedQuestion(dueQuestion.title);
+                    revisedQuestion(dueQuestion._id, new Date());
                   }}
                 >
                   ✅

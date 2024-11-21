@@ -14,7 +14,7 @@ router.get("/", getAllCompleteds);
 router.get("/due", getDueCompleteds);
 router.get("/:id", getCompleted);
 router.post("/", createCompleted);
-router.put("/:id", updateCompleted);
+router.patch("/", updateCompleted);
 router.delete("/:id", deleteCompleted);
 
 export default router;
