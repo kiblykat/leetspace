@@ -32,7 +32,12 @@ const QuestionList = () => {
   return (
     <>
       <div className="container mx-auto my-10 p-6 bg-base-200 rounded shadow-lg">
-        <h1 className="label font-bold text-xl">Questions due for revision</h1>
+        <h1 className="label font-bold text-xl">
+          Questions due for revision today:{" "}
+          <span className="text-orange-200">
+            {`${new Date(Date.now()).toISOString().replace(/T.*/g, "")}`}
+          </span>
+        </h1>
         <div className="flex align-middle justify-center"></div>
         <table className="table table-auto w-full">
           {/* Table Head */}
@@ -58,7 +63,7 @@ const QuestionList = () => {
               >
                 <td>{index + 1}</td>
                 <td>{dueQuestion.title}</td>
-                <td>
+                <td className="text-orange-200">
                   {dueQuestion.reviewDate.slice(
                     0,
                     dueQuestion.reviewDate.indexOf("T")
