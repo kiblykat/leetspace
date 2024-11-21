@@ -31,13 +31,17 @@ export function QuestionProvider({ children }) {
       [name]: value,
     });
     if (name === "title") {
-      const response = await questionApi.post(
-        "/api/leetcode_db/find-matching",
-        {
-          value,
-        }
-      );
-      setFoundLeets(response.data);
+      if (value !== "") {
+        const response = await questionApi.post(
+          "/api/leetcode_db/find-matching",
+          {
+            value,
+          }
+        );
+        setFoundLeets(response.data);
+      } else {
+        setFoundLeets([]);
+      }
     }
   };
 

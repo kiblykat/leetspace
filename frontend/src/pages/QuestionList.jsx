@@ -20,48 +20,51 @@ const QuestionList = () => {
     }
   };
   return (
-    <div className="container mx-auto p-6 bg-base-200 rounded shadow-lg">
-      <div className="flex align-middle justify-center">
-        <button className="btn" onClick={getDueQuestions}>
-          Refresh Questions due for Revision
-        </button>
-      </div>
-      <table className="table table-auto w-full">
-        {/* Table Head */}
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Last Reviewed</th>
-            <th>Tags</th>
-            <th>Difficulty</th>
-          </tr>
-        </thead>
-        {/* Table Body */}
-        <tbody>
-          {dueQuestions.map((dueQuestion, index) => (
-            <tr
-              key={dueQuestion._id}
-              className="btn-ghost cursor-pointer"
-              onClick={() =>
-                revisedQuestion(dueQuestion.title, dueQuestion.link)
-              }
-            >
-              <th>{index + 1}</th>
-              <td>{dueQuestion.title}</td>
-              <td>
-                {dueQuestion.reviewDate.slice(
-                  0,
-                  dueQuestion.reviewDate.indexOf("T")
-                )}
-              </td>
-              <td>{dueQuestion.tags.replace(/[[\]']/g, "")}</td>
-              <td>{dueQuestion.difficulty}</td>
+    <>
+      <div className="container mx-auto my-10 p-6 bg-base-200 rounded shadow-lg">
+        <h1 className="label font-bold text-xl">Questions due for revision</h1>
+        <div className="flex align-middle justify-center">
+          <button className="btn" onClick={getDueQuestions}>
+            Refresh Questions due for Revision
+          </button>
+        </div>
+        <table className="table table-auto w-full">
+          {/* Table Head */}
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Last Reviewed</th>
+              <th>Tags</th>
+              <th>Difficulty</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          {/* Table Body */}
+          <tbody>
+            {dueQuestions.map((dueQuestion, index) => (
+              <tr
+                key={dueQuestion._id}
+                className="btn-ghost cursor-pointer"
+                onClick={() =>
+                  revisedQuestion(dueQuestion.title, dueQuestion.link)
+                }
+              >
+                <th>{index + 1}</th>
+                <td>{dueQuestion.title}</td>
+                <td>
+                  {dueQuestion.reviewDate.slice(
+                    0,
+                    dueQuestion.reviewDate.indexOf("T")
+                  )}
+                </td>
+                <td>{dueQuestion.tags.replace(/[[\]']/g, "")}</td>
+                <td>{dueQuestion.difficulty}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 

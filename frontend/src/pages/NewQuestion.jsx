@@ -37,20 +37,25 @@ const NewQuestion = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">LeetCode ANKI</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">
+        LeetCode Spaced Repetition
+      </h1>
       <p className="text-center mb-3">
-        This App applies spaced repetition to leetcode problems similar to ANKI
+        This App applies spaced repetition to leetcode problems, similar to ANKI
       </p>
       <form
         className="flex flex-col bg-base-200 p-6 rounded shadow-lg"
         onSubmit={handleSubmit}
       >
         <div className="form-control">
-          <label className="label">Search for Leetcode Questions:</label>
+          <label className="label font-bold text-xl">
+            Add Leetcode Question to Repetition Bank:
+          </label>
           <input
             type="text"
             name="title"
             className="input input-bordered"
+            placeholder="Search for Questions"
             onChange={handleChange}
             required
           />
