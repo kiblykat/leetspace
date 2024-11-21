@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import questionApi from "../api/api";
 
 const QuestionList = () => {
   let [dueQuestions, setDueQuestions] = useState([]);
+  useEffect(() => {
+    getDueQuestions();
+  }, []);
   const getDueQuestions = async () => {
     try {
       const response = await questionApi.get("api/completed/due");
@@ -30,11 +33,7 @@ const QuestionList = () => {
     <>
       <div className="container mx-auto my-10 p-6 bg-base-200 rounded shadow-lg">
         <h1 className="label font-bold text-xl">Questions due for revision</h1>
-        <div className="flex align-middle justify-center">
-          <button className="btn" onClick={getDueQuestions}>
-            Refresh Questions due for Revision
-          </button>
-        </div>
+        <div className="flex align-middle justify-center"></div>
         <table className="table table-auto w-full">
           {/* Table Head */}
           <thead>
@@ -57,7 +56,7 @@ const QuestionList = () => {
                   openQuestionLink(dueQuestion.title, dueQuestion.link)
                 }
               >
-                <th>{index + 1}</th>
+                <td>{index + 1}</td>
                 <td>{dueQuestion.title}</td>
                 <td>
                   {dueQuestion.reviewDate.slice(
