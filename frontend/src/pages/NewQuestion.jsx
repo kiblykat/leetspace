@@ -60,9 +60,13 @@ const NewQuestion = () => {
             required
           />
           <table className="table table-auto ">
-            <th>Title</th>
-            <th>Difficulty</th>
-            <th>Tags</th>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Difficulty</th>
+                <th>Tags</th>
+              </tr>
+            </thead>
             <tbody>
               {foundLeets?.map((foundLeet) => (
                 <tr
