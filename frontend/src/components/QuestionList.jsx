@@ -1,19 +1,23 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import QuestionContext from "../contexts/QuestionContext.jsx";
+import ConfidenceTable from "./ConfidenceTable.jsx";
 
 const QuestionList = () => {
-
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [selectedQuestion, setSelectedQuestion] = useState("");
   const qnContext = useContext(QuestionContext);
   const { dueQuestions, getDueQuestions, revisedQuestion } = qnContext;
-  
+
   useEffect(() => {
     getDueQuestions();
   }, [getDueQuestions]);
 
-
   const openQuestionLink = async (title, link) => {
     try {
       window.open(link, "_blank");
+      console.log(title);
+      setSelectedQuestion(title); // Store the selected question
+      setPopupVisible(true); // Show the popup
     } catch (err) {
       console.error("Failed to open the link:", err.message);
     }
@@ -69,7 +73,12 @@ const QuestionList = () => {
                     data-tooltip="Mark as Revised"
                     onClick={(e) => {
                       e.stopPropagation();
-                      revisedQuestion(dueQuestion.title, dueQuestion._id, dueQuestion.difficulty, dueQuestion.currentInterval);
+                      revisedQuestion(
+                        dueQuestion.title,
+                        dueQuestion._id,
+                        dueQuestion.difficulty,
+                        dueQuestion.currentInterval
+                      );
                     }}
                   >
                     ✅
@@ -80,9 +89,19 @@ const QuestionList = () => {
           </table>
         </div>
         <div className="flex justify-center m-5">
-          <button className="btn bg-orange-300 text-black hover:bg-orange-400">View Current Repetition Bank</button>
+          <button className="btn bg-orange-300 text-black hover:bg-orange-400">
+            View Current Repetition Bank
+          </button>
         </div>
       </div>
+      {/* DaisyUI Modal */}
+      {popupVisible && (
+        <ConfidenceTable
+          selectedQuestion={selectedQuestion}
+          setSelectedQuestion={setSelectedQuestion}
+          setPopupVisible={setPopupVisible}
+        />
+      )}
     </>
   );
 };
