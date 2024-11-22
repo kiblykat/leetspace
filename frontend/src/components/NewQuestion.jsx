@@ -1,35 +1,10 @@
 import { useContext } from "react";
 import QuestionContext from "../contexts/QuestionContext";
-import questionApi from "../api/api";
-import toast from "react-hot-toast";
 
 const NewQuestion = () => {
   const questionCtx = useContext(QuestionContext);
 
-  //Add new question to the repetition bank
-  const addNewQn = async (question, question_link, topic_tags, difficulty) => {
-    try {
-      let newQuestion = {
-        title: question,
-        link: question_link,
-        tags: topic_tags,
-        difficulty: difficulty,
-      };
-      console.log(
-        `topic_tags is ${
-          newQuestion.tags
-        }, typeof topic_tags is ${typeof newQuestion.tags}`
-      );
-      let response = await questionApi.post("/api/completed", newQuestion);
-      console.log(`response is ${JSON.stringify(response.data)}`);
-      toast.success(`${question} added to the repetition bank`,  {
-        duration: 3000,
-      });
-    } catch (err) {
-      console.log(err);
-      toast.error(`Error: ${err.response.data.error}`, {duration: 4000});
-    }
-  };
+
   const {
     // questions,
     // setQuestions,
@@ -38,6 +13,7 @@ const NewQuestion = () => {
     // getAllQuestions,
     handleChange,
     foundLeets,
+    addNewQn
   } = questionCtx;
 
   return (

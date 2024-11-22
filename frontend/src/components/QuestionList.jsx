@@ -1,20 +1,15 @@
-import { useEffect, useState } from "react";
-import questionApi from "../api/api";
-import toast from "react-hot-toast";
+import { useContext, useEffect } from "react";
+import QuestionContext from "../contexts/QuestionContext.jsx";
 
 const QuestionList = () => {
-  let [dueQuestions, setDueQuestions] = useState([]);
+
+  const qnContext = useContext(QuestionContext);
+  const { dueQuestions, getDueQuestions, revisedQuestion } = qnContext;
+  
   useEffect(() => {
     getDueQuestions();
   }, []);
-  const getDueQuestions = async () => {
-    try {
-      const response = await questionApi.get("api/completed/due");
-      setDueQuestions(response.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
 
   const openQuestionLink = async (title, link) => {
     try {
@@ -23,17 +18,7 @@ const QuestionList = () => {
       console.error("Failed to open the link:", err.message);
     }
   };
-  const revisedQuestion = async (title, id, reviewDate) => {
-    try {
-      let updatedDate = { id, reviewDate };
-      await questionApi.patch("/api/completed", updatedDate);
-      toast.success(`${title} marked as revised`,  {
-        duration: 3000,
-      });
-    } catch (err) {
-      console.error("Failed to open the link:", err.message);
-    }
-  };
+
   return (
     <>
       <div className="container mx-auto my-10 p-6 bg-base-200 rounded shadow-lg">
