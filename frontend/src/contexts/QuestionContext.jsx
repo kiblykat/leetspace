@@ -27,15 +27,16 @@ export function QuestionProvider({ children }) {
     }
   };
 
-  const revisedQuestion = async (title, id, reviewDate) => {
+  const revisedQuestion = async (title, id, difficulty, currentInterval) => {
     try {
-      let updatedDate = { id, reviewDate };
-      await questionApi.patch("/api/completed", updatedDate);
+      let questionToUpdate = { id, difficulty, currentInterval };
+      await questionApi.post("/api/completed/update", questionToUpdate);
       toast.success(`${title} marked as revised`,  {
         duration: 3000,
       });
+      getDueQuestions(); //is this required?
     } catch (err) {
-      console.error("Failed to open the link:", err.message);
+      console.error("Failed to update question: ", err.message);
     }
   };
   //===========================================================================
@@ -55,7 +56,7 @@ export function QuestionProvider({ children }) {
             newQuestion.tags
           }, typeof topic_tags is ${typeof newQuestion.tags}`
         );
-        let response = await questionApi.post("/api/completed", newQuestion);
+        let response = await questionApi.post("/api/completed/create", newQuestion);
         console.log(`response is ${JSON.stringify(response.data)}`);
         toast.success(`${question} added to the repetition bank`,  {
           duration: 3000,

@@ -13,8 +13,8 @@ const router = express.Router();
 router.get("/", getAllCompleteds);
 router.get("/due", getDueCompleteds);
 router.get("/:id", getCompleted);
-router.post("/", createCompleted);
-router.patch("/", updateCompleted);
+router.post("/create", createCompleted);
+router.post("/update", updateCompleted);
 router.delete("/:id", deleteCompleted);
 
 export default router;

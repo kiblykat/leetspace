@@ -34,8 +34,7 @@ export const createCompleted = async (req, res) => {
     const { title, link, tags, difficulty } = req.body;
     const existingCompleted = await completedModel.findOne({title});
     if(existingCompleted) return res.status(400).json({error: "Question already exists in repetition bank"});
-    //todo: +1 times completed everytime completed is done
-    //todo: if difficulty == easy/med/hard, interval should be diff
+    //if difficulty == easy/med/hard, interval should be diff
     let currentInterval;
     switch(difficulty) {
       case "Easy":
@@ -79,18 +78,44 @@ export const getAllCompleteds = async (req, res) => {
   }
 };
 
-// Update a completed
+// Update a completed question after reviewing
 export const updateCompleted = async (req, res) => {
   try {
-    const { id, reviewDate } = req.body;
-    const updatedCompleted = await completedModel.updateOne(
-      { _id: id },
-      { $set: { reviewDate } }
-    );
+    let { id, difficulty, currentInterval } = req.body;
+
+    //difficulty duration percentage multiplier
+    switch(difficulty) {
+      case "Easy":
+        currentInterval = Math.round(currentInterval*=(120/100));
+        break;
+      case "Medium":
+        currentInterval = Math.round(currentInterval*=(130/100));
+        break;
+      case "Hard":
+        currentInterval = Math.round(currentInterval*=(140/100));
+        break;
+      default:
+        currentInterval = Math.round(currentInterval*=(120/100));
+    }
+    const updatedCompleted = await completedModel.findByIdAndUpdate(
+      id, 
+      {
+        //update reviewDate to current date + currentInterval 
+        $set: {
+          reviewDate: new Date(Date.now() + currentInterval * 24 * 60 * 60 * 1000),
+          currentInterval:  currentInterval
+        },
+        //+1 timesReviewed everytime completed is done
+        $inc: {
+          timesReviewed: 1
+        }
+      },
+      { new: true })
     if (!updatedCompleted)
       return res.status(404).json({ error: "completedModel not found" });
     res.json(updatedCompleted);
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: error });
   }
 };

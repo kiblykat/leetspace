@@ -67,7 +67,7 @@ const QuestionList = () => {
                     data-tooltip="Mark as Revised"
                     onClick={(e) => {
                       e.stopPropagation();
-                      revisedQuestion(dueQuestion.title, dueQuestion._id, new Date());
+                      revisedQuestion(dueQuestion.title, dueQuestion._id, dueQuestion.difficulty, dueQuestion.currentInterval);
                     }}
                   >
                     ✅
