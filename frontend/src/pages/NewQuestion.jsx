@@ -36,7 +36,7 @@ const NewQuestion = () => {
   } = questionCtx;
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-6 bg-base-200 rounded shadow-lg">
       <h1 className="text-3xl font-bold mb-6 text-center">
         LeetCode Spaced Repetition
       </h1>
@@ -44,7 +44,7 @@ const NewQuestion = () => {
         This App applies spaced repetition to leetcode problems, similar to ANKI
       </p>
       <form
-        className="flex flex-col bg-base-200 p-6 rounded shadow-lg"
+        className="flex flex-col p-6 rounded shadow-lg"
         onSubmit={handleSubmit}
       >
         <div className="form-control">
