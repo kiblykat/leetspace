@@ -4,17 +4,7 @@ import QuestionContext from "../contexts/QuestionContext";
 const NewQuestion = () => {
   const questionCtx = useContext(QuestionContext);
 
-
-  const {
-    // questions,
-    // setQuestions,
-    // loading,
-    // setLoading,
-    // getAllQuestions,
-    handleChange,
-    foundLeets,
-    addNewQn
-  } = questionCtx;
+  const { handleChange, foundLeets, addNewQn } = questionCtx;
 
   return (
     <div className="container mx-auto p-6 bg-base-200 rounded shadow-lg">
@@ -24,9 +14,7 @@ const NewQuestion = () => {
       <p className="text-center mb-3">
         This App applies spaced repetition to leetcode problems, similar to ANKI
       </p>
-      <form
-        className="flex flex-col p-6 rounded shadow-lg"
-      >
+      <form className="flex flex-col p-6 rounded shadow-lg">
         <div className="form-control">
           <label className="label font-bold text-xl">
             Add Leetcode Question to Repetition Bank:
