@@ -1,5 +1,5 @@
-import NewQuestion from "./pages/NewQuestion";
-import QuestionList from "./pages/QuestionList";
+import NewQuestion from "./components/NewQuestion";
+import QuestionList from "./components/QuestionList";
 
 function App() {
   return (
