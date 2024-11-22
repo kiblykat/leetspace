@@ -1,8 +1,8 @@
-# ????? LeetTracker: Implementing spaced repetition on leetcode questions for algorithm revision.
+# 👨‍💻 LeetTracker: Implementing spaced repetition on leetcode questions for algorithm revision.
 
 live demo can be found at <<u>coming soon</u>>
 
-## ?? Tech Stack 
+## 💻 Tech Stack 
 - Frontend: React, Tailwind, DaisyUI
 - Backend: Node.js, Express
 - Database: MongoDB
