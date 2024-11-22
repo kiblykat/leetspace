@@ -8,7 +8,7 @@ const QuestionList = () => {
   
   useEffect(() => {
     getDueQuestions();
-  }, []);
+  }, [getDueQuestions]);
 
 
   const openQuestionLink = async (title, link) => {

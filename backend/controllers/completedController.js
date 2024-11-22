@@ -35,13 +35,31 @@ export const createCompleted = async (req, res) => {
     const existingCompleted = await completedModel.findOne({title});
     if(existingCompleted) return res.status(400).json({error: "Question already exists in repetition bank"});
     //todo: +1 times completed everytime completed is done
+    //todo: if difficulty == easy/med/hard, interval should be diff
+    let currentInterval;
+    switch(difficulty) {
+      case "Easy":
+        currentInterval = 1;
+        break;
+      case "Medium":
+        currentInterval = 3;
+        break;
+      case "Hard":
+        currentInterval = 6;
+        break;
+      default:
+        currentInterval = 1;
+    }
+    
+
     const newCompleted = new completedModel({
       title,
       link,
       difficulty,
       tags,
       createdDate: Date.now(),
-      reviewDate: Date.now(),
+      reviewDate: new Date(Date.now() + currentInterval * 24 * 60 * 60 * 1000), // current date + interval in days
+      currentInterval,
       timesReviewed: 0,
     });
     let savedCompleted = await completedModel.create(newCompleted);
