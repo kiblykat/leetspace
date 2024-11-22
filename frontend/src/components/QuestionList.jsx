@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import questionApi from "../api/api";
+import toast from "react-hot-toast";
 
 const QuestionList = () => {
   let [dueQuestions, setDueQuestions] = useState([]);
@@ -22,10 +23,13 @@ const QuestionList = () => {
       console.error("Failed to open the link:", err.message);
     }
   };
-  const revisedQuestion = async (id, reviewDate) => {
+  const revisedQuestion = async (title, id, reviewDate) => {
     try {
       let updatedDate = { id, reviewDate };
       await questionApi.patch("/api/completed", updatedDate);
+      toast.success(`${title} marked as revised`,  {
+        duration: 3000,
+      });
     } catch (err) {
       console.error("Failed to open the link:", err.message);
     }
@@ -78,7 +82,7 @@ const QuestionList = () => {
                     data-tooltip="Mark as Revised"
                     onClick={(e) => {
                       e.stopPropagation();
-                      revisedQuestion(dueQuestion._id, new Date());
+                      revisedQuestion(dueQuestion.title, dueQuestion._id, new Date());
                     }}
                   >
                     ✅

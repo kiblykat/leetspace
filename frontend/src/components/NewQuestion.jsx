@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import QuestionContext from "../contexts/QuestionContext";
 import questionApi from "../api/api";
+import toast from "react-hot-toast";
 
 const NewQuestion = () => {
   const questionCtx = useContext(QuestionContext);
 
+  //Add new question to the repetition bank
   const addNewQn = async (question, question_link, topic_tags, difficulty) => {
     try {
       let newQuestion = {
@@ -20,6 +22,9 @@ const NewQuestion = () => {
       );
       let response = await questionApi.post("/api/completed", newQuestion);
       console.log(`response is ${JSON.stringify(response.data)}`);
+      toast.success(`${question} added to the repetition bank`,  {
+        duration: 3000,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -29,7 +34,6 @@ const NewQuestion = () => {
     // setQuestions,
     // loading,
     // setLoading,
-    handleSubmit,
     // getAllQuestions,
     handleChange,
     foundLeets,
@@ -45,7 +49,6 @@ const NewQuestion = () => {
       </p>
       <form
         className="flex flex-col p-6 rounded shadow-lg"
-        onSubmit={handleSubmit}
       >
         <div className="form-control">
           <label className="label font-bold text-xl">
