@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const completedSchema = new mongoose.Schema({
-  title: { type: String, required: true },
+  title: { type: String, required: true, unique: true },
   link: { type: String, required: true },
   notes: { type: String, default: "" },
   difficulty: {

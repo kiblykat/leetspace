@@ -32,6 +32,8 @@ export const getDueCompleteds = async (req, res) => {
 export const createCompleted = async (req, res) => {
   try {
     const { title, link, tags, difficulty } = req.body;
+    const existingCompleted = await completedModel.findOne({title});
+    if(existingCompleted) return res.status(400).json({error: "Question already exists in repetition bank"});
     //todo: +1 times completed everytime completed is done
     const newCompleted = new completedModel({
       title,

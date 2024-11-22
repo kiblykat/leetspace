@@ -27,6 +27,7 @@ const NewQuestion = () => {
       });
     } catch (err) {
       console.log(err);
+      toast.error(`Error: ${err.response.data.error}`, {duration: 4000});
     }
   };
   const {
