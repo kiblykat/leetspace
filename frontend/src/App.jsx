@@ -1,11 +1,19 @@
-import NewQuestion from "./components/NewQuestion";
-import QuestionList from "./components/QuestionList";
+import { Routes, HashRouter, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Bank from "./pages/Bank";
+import RootLayout from "./layouts/RootLayout";
 
 function App() {
   return (
     <>
-      <NewQuestion />
-      <QuestionList />
+      <HashRouter>
+        <Routes>
+          <Route path="/" element={<RootLayout />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/bank" element={<Bank />} />
+          </Route>
+        </Routes>
+      </HashRouter>
     </>
   );
 }

@@ -1,12 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import QuestionContext from "../contexts/QuestionContext.jsx";
 import ConfidenceTable from "./ConfidenceTable.jsx";
+import { useNavigate } from "react-router-dom";
 
 const QuestionList = () => {
   const [popupVisible, setPopupVisible] = useState(false);
   const [selectedQuestionId, setSelectedQuestionId] = useState("");
   const qnContext = useContext(QuestionContext);
   const { dueQuestions, getDueQuestions } = qnContext;
+  const navigate = useNavigate();
 
   useEffect(() => {
     getDueQuestions();
@@ -66,14 +68,17 @@ const QuestionList = () => {
                   </td>
                   <td>{dueQuestion.tags.replace(/[[\]']/g, "")}</td>
                   <td>{dueQuestion.difficulty}</td>
-                  <td>{dueQuestion.timesReviewed}</td>
+                  <td>{dueQuestion.reviewCount}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
         <div className="flex justify-center m-5">
-          <button className="btn bg-orange-300 text-black hover:bg-orange-400">
+          <button
+            className="btn bg-orange-300 text-black hover:bg-orange-400"
+            onClick={() => navigate("/bank")}
+          >
             View Current Repetition Bank
           </button>
         </div>

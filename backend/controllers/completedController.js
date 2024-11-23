@@ -61,7 +61,7 @@ export const createCompleted = async (req, res) => {
       createdDate: Date.now(),
       reviewDate: new Date(Date.now() + currentInterval * 24 * 60 * 60 * 1000), // current date + interval in days
       currentInterval,
-      timesReviewed: 0,
+      reviewCount: 0,
     });
     let savedCompleted = await completedModel.create(newCompleted);
     res.status(201).json(savedCompleted);
@@ -110,9 +110,9 @@ export const updateCompleted = async (req, res) => {
           ),
           currentInterval: currentInterval,
         },
-        //+1 timesReviewed everytime completed is done
+        //+1 reviewCount everytime completed is done
         $inc: {
-          timesReviewed: 1,
+          reviewCount: 1,
         },
       },
       { new: true }

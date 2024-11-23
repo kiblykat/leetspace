@@ -41,7 +41,7 @@ const completedSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  timesReviewed: {
+  reviewCount: {
     type: Number,
     required: true,
   },
