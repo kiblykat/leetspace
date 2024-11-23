@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 
 let QuestionContext = createContext();
 
-// eslint-disable-next-line react/prop-types
 export function QuestionProvider({ children }) {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);

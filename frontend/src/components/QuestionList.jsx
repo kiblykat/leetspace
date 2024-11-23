@@ -6,7 +6,7 @@ const QuestionList = () => {
   const [popupVisible, setPopupVisible] = useState(false);
   const [selectedQuestionId, setSelectedQuestionId] = useState("");
   const qnContext = useContext(QuestionContext);
-  const { dueQuestions, getDueQuestions, revisedQuestion } = qnContext;
+  const { dueQuestions, getDueQuestions } = qnContext;
 
   useEffect(() => {
     getDueQuestions();
