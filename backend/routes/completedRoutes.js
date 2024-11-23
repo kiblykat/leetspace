@@ -8,6 +8,8 @@ import {
   getDueCompleteds,
 } from "../controllers/completedController.js";
 
+//route: api/completed
+
 const router = express.Router();
 
 router.get("/", getAllCompleteds);

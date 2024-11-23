@@ -4,6 +4,8 @@ import {
   getMatchingLeets,
 } from "../controllers/leetcode_dbController.js";
 
+//route: api/leetcode_db
+
 const router = express.Router();
 
 router.get("/", getAllLeets);
