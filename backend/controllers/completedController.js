@@ -32,24 +32,26 @@ export const getDueCompleteds = async (req, res) => {
 export const createCompleted = async (req, res) => {
   try {
     const { title, link, tags, difficulty } = req.body;
-    const existingCompleted = await completedModel.findOne({title});
-    if(existingCompleted) return res.status(400).json({error: "Question already exists in repetition bank"});
+    const existingCompleted = await completedModel.findOne({ title });
+    if (existingCompleted)
+      return res
+        .status(400)
+        .json({ error: "Question already exists in repetition bank" });
     //if difficulty == easy/med/hard, interval should be diff
     let currentInterval;
-    switch(difficulty) {
+    switch (difficulty) {
       case "Easy":
-        currentInterval = 1;
-        break;
-      case "Medium":
         currentInterval = 3;
         break;
+      case "Medium":
+        currentInterval = 2;
+        break;
       case "Hard":
-        currentInterval = 6;
+        currentInterval = 1;
         break;
       default:
-        currentInterval = 1;
+        currentInterval = 3;
     }
-    
 
     const newCompleted = new completedModel({
       title,
@@ -81,41 +83,46 @@ export const getAllCompleteds = async (req, res) => {
 // Update a completed question after reviewing
 export const updateCompleted = async (req, res) => {
   try {
-    let { id, difficulty, currentInterval } = req.body;
+    let { _id, difficulty, userRecallDifficulty, currentInterval } = req.body;
+    console.log(`completedmodel id is ${_id}`);
 
-    //difficulty duration percentage multiplier
-    switch(difficulty) {
+    //userDifficulty duration percentage multiplier
+    switch (difficulty) {
       case "Easy":
-        currentInterval = Math.round(currentInterval*=(120/100));
+        currentInterval = Math.round((currentInterval *= 120 / 100));
         break;
       case "Medium":
-        currentInterval = Math.round(currentInterval*=(130/100));
+        currentInterval = Math.round((currentInterval *= 130 / 100));
         break;
       case "Hard":
-        currentInterval = Math.round(currentInterval*=(140/100));
+        currentInterval = Math.round((currentInterval *= 140 / 100));
         break;
       default:
-        currentInterval = Math.round(currentInterval*=(120/100));
+        currentInterval = Math.round((currentInterval *= 120 / 100));
     }
     const updatedCompleted = await completedModel.findByIdAndUpdate(
-      id, 
+      _id,
       {
-        //update reviewDate to current date + currentInterval 
+        //update reviewDate to current date + currentInterval
         $set: {
-          reviewDate: new Date(Date.now() + currentInterval * 24 * 60 * 60 * 1000),
-          currentInterval:  currentInterval
+          reviewDate: new Date(
+            Date.now() + currentInterval * 24 * 60 * 60 * 1000
+          ),
+          currentInterval: currentInterval,
         },
         //+1 timesReviewed everytime completed is done
         $inc: {
-          timesReviewed: 1
-        }
+          timesReviewed: 1,
+        },
       },
-      { new: true })
-    if (!updatedCompleted)
+      { new: true }
+    );
+    if (!updatedCompleted) {
       return res.status(404).json({ error: "completedModel not found" });
+    }
     res.json(updatedCompleted);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({ error: error });
   }
 };

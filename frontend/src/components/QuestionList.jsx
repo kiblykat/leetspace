@@ -4,7 +4,7 @@ import ConfidenceTable from "./ConfidenceTable.jsx";
 
 const QuestionList = () => {
   const [popupVisible, setPopupVisible] = useState(false);
-  const [selectedQuestion, setSelectedQuestion] = useState("");
+  const [selectedQuestionId, setSelectedQuestionId] = useState("");
   const qnContext = useContext(QuestionContext);
   const { dueQuestions, getDueQuestions, revisedQuestion } = qnContext;
 
@@ -12,11 +12,11 @@ const QuestionList = () => {
     getDueQuestions();
   }, [getDueQuestions]);
 
-  const openQuestionLink = async (title, link) => {
+  const openQuestionLink = async (id, link) => {
     try {
       window.open(link, "_blank");
-      console.log(title);
-      setSelectedQuestion(title); // Store the selected question
+      console.log(id);
+      setSelectedQuestionId(id); // Store the selected question
       setPopupVisible(true); // Show the popup
     } catch (err) {
       console.error("Failed to open the link:", err.message);
@@ -54,7 +54,7 @@ const QuestionList = () => {
                   key={dueQuestion._id}
                   className="hover:bg-base-300 btn-ghost cursor-pointer z-10"
                   onClick={() =>
-                    openQuestionLink(dueQuestion.title, dueQuestion.link)
+                    openQuestionLink(dueQuestion._id, dueQuestion.link)
                   }
                 >
                   <td>{index + 1}</td>
@@ -97,8 +97,8 @@ const QuestionList = () => {
       {/* DaisyUI Modal */}
       {popupVisible && (
         <ConfidenceTable
-          selectedQuestion={selectedQuestion}
-          setSelectedQuestion={setSelectedQuestion}
+          selectedQuestionId={selectedQuestionId}
+          setSelectedQuestionId={setSelectedQuestionId}
           setPopupVisible={setPopupVisible}
         />
       )}

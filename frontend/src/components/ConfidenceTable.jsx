@@ -1,18 +1,47 @@
+import questionApi from "../api/api";
+import toast from "react-hot-toast";
+
 const ConfidenceTable = ({
-  selectedQuestion,
-  setSelectedQuestion,
+  selectedQuestionId,
+  setSelectedQuestionId,
   setPopupVisible,
 }) => {
   // Close the popup
   const closePopup = () => {
     console.log("Closing the popup");
     setPopupVisible(false); // Hide the popup
-    setSelectedQuestion(null); // Clear the selected question
+    setSelectedQuestionId(null); // Clear the selected question
   };
 
   // Handle difficulty selection
-  const handleDifficultySelection = (difficulty) => {
-    console.log(`User selected ${difficulty} for`, selectedQuestion);
+  const handleDifficultySelection = async (userRecallDifficulty) => {
+    console.log(
+      `User selected ${userRecallDifficulty} for`,
+      selectedQuestionId
+    );
+    // get ID and currentInterval from the selectedQuestionId
+    const currentCompleted = await questionApi.get(
+      `/api/completed/${selectedQuestionId}`
+    );
+    console.log(currentCompleted);
+    const { _id, difficulty, currentInterval } = currentCompleted.data;
+
+    let questionToUpdate = {
+      _id,
+      difficulty,
+      userRecallDifficulty,
+      currentInterval,
+    };
+    console.log(
+      questionToUpdate._id,
+      questionToUpdate.difficulty,
+      questionToUpdate.userRecallDifficulty,
+      questionToUpdate.currentInterval
+    );
+    await questionApi.post("/api/completed/update", questionToUpdate);
+    toast.success(`${_id} marked as revised`, {
+      duration: 3000,
+    });
     closePopup(); // Close the popup after selection
   };
 
@@ -28,7 +57,7 @@ const ConfidenceTable = ({
           onClick={(e) => e.stopPropagation()}
         >
           <h3 className="text-lg font-bold mb-4 text-orange-200">
-            {selectedQuestion}
+            {selectedQuestionId}
           </h3>
           <p className="mb-4 text-white">
             How would you rate the difficulty of this question?
