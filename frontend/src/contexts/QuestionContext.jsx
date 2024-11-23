@@ -12,7 +12,7 @@ export function QuestionProvider({ children }) {
   const [foundLeets, setFoundLeets] = useState([]);
   const [title, setTitle] = useState("");
 
-  //======================== QUESTIONLIST.JSX STATES ========================  
+  //======================== QUESTIONLIST.JSX STATES ========================
   let [dueQuestions, setDueQuestions] = useState([]);
   //===========================================================================
 
@@ -27,45 +27,36 @@ export function QuestionProvider({ children }) {
     }
   };
 
-  const revisedQuestion = async (title, id, difficulty, currentInterval) => {
-    try {
-      let questionToUpdate = { id, difficulty, currentInterval };
-      await questionApi.post("/api/completed/update", questionToUpdate);
-      toast.success(`${title} marked as revised`,  {
-        duration: 3000,
-      });
-      getDueQuestions(); //is this required?
-    } catch (err) {
-      console.error("Failed to update question: ", err.message);
-    }
-  };
   //===========================================================================
 
   //======================== NEWQUESTION.JSX FUNCTIONS ========================
-    //Add new question to the repetition bank
-    const addNewQn = async (question, question_link, topic_tags, difficulty) => {
-      try {
-        let newQuestion = {
-          title: question,
-          link: question_link,
-          tags: topic_tags,
-          difficulty: difficulty,
-        };
-        console.log(
-          `topic_tags is ${
-            newQuestion.tags
-          }, typeof topic_tags is ${typeof newQuestion.tags}`
-        );
-        let response = await questionApi.post("/api/completed/create", newQuestion);
-        console.log(`response is ${JSON.stringify(response.data)}`);
-        toast.success(`${question} added to the repetition bank`,  {
-          duration: 3000,
-        });
-      } catch (err) {
-        console.log(err);
-        toast.error(`Error: ${err.response.data.error}`, {duration: 4000});
-      }
-    };
+  //Add new question to the repetition bank
+  const addNewQn = async (question, question_link, topic_tags, difficulty) => {
+    try {
+      let newQuestion = {
+        title: question,
+        link: question_link,
+        tags: topic_tags,
+        difficulty: difficulty,
+      };
+      console.log(
+        `topic_tags is ${
+          newQuestion.tags
+        }, typeof topic_tags is ${typeof newQuestion.tags}`
+      );
+      let response = await questionApi.post(
+        "/api/completed/create",
+        newQuestion
+      );
+      console.log(`response is ${JSON.stringify(response.data)}`);
+      toast.success(`${question} added to the repetition bank`, {
+        duration: 3000,
+      });
+    } catch (err) {
+      console.log(err);
+      toast.error(`Error: ${err.response.data.error}`, { duration: 4000 });
+    }
+  };
   //===========================================================================
 
   async function getAllQuestions() {
@@ -142,8 +133,7 @@ export function QuestionProvider({ children }) {
     dueQuestions,
     setDueQuestions,
     getDueQuestions,
-    revisedQuestion,
-    addNewQn
+    addNewQn,
   };
 
   return (

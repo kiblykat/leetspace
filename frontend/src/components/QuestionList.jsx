@@ -44,7 +44,6 @@ const QuestionList = () => {
                 <th>Tags</th>
                 <th>Difficulty</th>
                 <th>Revision Count</th>
-                <th className="text-center">Revised</th>
               </tr>
             </thead>
             {/* Table Body */}
@@ -68,21 +67,6 @@ const QuestionList = () => {
                   <td>{dueQuestion.tags.replace(/[[\]']/g, "")}</td>
                   <td>{dueQuestion.difficulty}</td>
                   <td>{dueQuestion.timesReviewed}</td>
-                  <td
-                    className="text-center text-xl z-20 hover:bg-green-100"
-                    data-tooltip="Mark as Revised"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      revisedQuestion(
-                        dueQuestion.title,
-                        dueQuestion._id,
-                        dueQuestion.difficulty,
-                        dueQuestion.currentInterval
-                      );
-                    }}
-                  >
-                    ✅
-                  </td>
                 </tr>
               ))}
             </tbody>
