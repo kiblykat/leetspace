@@ -9,11 +9,6 @@ const completedSchema = new mongoose.Schema({
     required: true,
     enum: ["Easy", "Medium", "Hard"],
   },
-  userRecallDifficulty: {
-    type: String,
-    required: true,
-    enum: ["Easy", "Medium", "Hard"],
-  },
   topic: {
     type: String,
     enum: [

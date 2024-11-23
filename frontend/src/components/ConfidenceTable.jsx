@@ -24,20 +24,14 @@ const ConfidenceTable = ({
       `/api/completed/${selectedQuestionId}`
     );
     console.log(currentCompleted);
-    const { _id, difficulty, currentInterval } = currentCompleted.data;
+    const { _id, currentInterval } = currentCompleted.data;
 
     let questionToUpdate = {
       _id,
-      difficulty,
       userRecallDifficulty,
       currentInterval,
     };
-    console.log(
-      questionToUpdate._id,
-      questionToUpdate.difficulty,
-      questionToUpdate.userRecallDifficulty,
-      questionToUpdate.currentInterval
-    );
+
     await questionApi.post("/api/completed/update", questionToUpdate);
     toast.success(`${_id} marked as revised`, {
       duration: 3000,

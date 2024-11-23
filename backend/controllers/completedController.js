@@ -83,11 +83,11 @@ export const getAllCompleteds = async (req, res) => {
 // Update a completed question after reviewing
 export const updateCompleted = async (req, res) => {
   try {
-    let { _id, difficulty, userRecallDifficulty, currentInterval } = req.body;
+    let { _id, userRecallDifficulty, currentInterval } = req.body;
     console.log(`completedmodel id is ${_id}`);
 
     //userDifficulty duration percentage multiplier
-    switch (difficulty) {
+    switch (userRecallDifficulty) {
       case "Easy":
         currentInterval = Math.round((currentInterval *= 120 / 100));
         break;
