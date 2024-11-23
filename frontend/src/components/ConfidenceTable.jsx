@@ -24,7 +24,7 @@ const ConfidenceTable = ({
       `/api/completed/${selectedQuestionId}`
     );
     console.log(currentCompleted);
-    const { _id, currentInterval } = currentCompleted.data;
+    const { _id, title, currentInterval } = currentCompleted.data;
 
     let questionToUpdate = {
       _id,
@@ -33,7 +33,7 @@ const ConfidenceTable = ({
     };
 
     await questionApi.post("/api/completed/update", questionToUpdate);
-    toast.success(`${_id} marked as revised`, {
+    toast.success(`${title} marked as revised`, {
       duration: 3000,
     });
     closePopup(); // Close the popup after selection
