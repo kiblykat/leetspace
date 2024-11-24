@@ -7,7 +7,7 @@ let QuestionContext = createContext();
 export function QuestionProvider({ children }) {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [searchQuestion, setSearchQuestion] = useState("");
   const [foundLeets, setFoundLeets] = useState([]);
   const [title, setTitle] = useState("");
 
@@ -69,35 +69,15 @@ export function QuestionProvider({ children }) {
     setLoading(false);
   }
 
-  // Find leetcode questions that match the search query
-  async function findLeets(name, value) {
-    if (name === "title") {
-      if (value !== "") {
-        const response = await questionApi.post(
-          "/api/leetcode_db/find-matching",
-          {
-            value,
-          }
-        );
-        setFoundLeets(response.data);
-      } else {
-        setFoundLeets([]);
-      }
-    }
-  }
-
   // Handle changes in the form fields
   const handleChange = async (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-    debouncedFindLeets(name, value); // Use the debounced function
+    const { value } = e.target;
+    setSearchQuestion(value);
+    debouncedFindLeets(value); // Use the debounced function
   };
 
   // Debounce Function
-  const debounce = (callback, delay = 1000) => {
+  const debounce = (callback, delay = 500) => {
     let timeout;
     return (...args) => {
       clearTimeout(timeout); // Clear any existing timeout
@@ -106,9 +86,23 @@ export function QuestionProvider({ children }) {
       }, delay);
     };
   };
-
   // impt: useCallback ensures the same instance of the function is used on every call
-  const debouncedFindLeets = useCallback(debounce(findLeets, 500), []);
+  const debouncedFindLeets = useCallback(debounce(findLeets), []);
+
+  // Find leetcode questions that match the search query
+  async function findLeets(value) {
+    if (value !== "") {
+      const response = await questionApi.post(
+        "/api/leetcode_db/find-matching",
+        {
+          value,
+        }
+      );
+      setFoundLeets(response.data);
+    } else {
+      setFoundLeets([]);
+    }
+  }
 
   let context = {
     questions,
