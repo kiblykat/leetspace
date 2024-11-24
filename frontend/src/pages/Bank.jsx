@@ -64,7 +64,12 @@ const Bank = () => {
                     <td>{question.title}</td>
                     <td>{question.tags}</td>
                     <td>{question.difficulty}</td>
-                    <td>{question.reviewDate}</td>
+                    <td>
+                      {question.reviewDate.slice(
+                        0,
+                        question.reviewDate.indexOf("T")
+                      )}
+                    </td>
                     <td>{question.reviewCount}</td>
                   </tr>
                 ))}
