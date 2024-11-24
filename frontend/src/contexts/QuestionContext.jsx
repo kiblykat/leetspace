@@ -7,7 +7,6 @@ let QuestionContext = createContext();
 export function QuestionProvider({ children }) {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchQuestion, setSearchQuestion] = useState("");
   const [foundLeets, setFoundLeets] = useState([]);
   const [title, setTitle] = useState("");
 
@@ -72,7 +71,6 @@ export function QuestionProvider({ children }) {
   // Handle changes in the form fields
   const handleChange = async (e) => {
     const { value } = e.target;
-    setSearchQuestion(value);
     debouncedFindLeets(value); // Use the debounced function
   };
 
