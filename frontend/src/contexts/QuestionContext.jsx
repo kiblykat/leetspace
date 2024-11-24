@@ -16,7 +16,7 @@ export function QuestionProvider({ children }) {
   //===========================================================================
 
   //======================== QUESTIONLIST.JSX FUNCTIONS ========================
-
+  // Get all questions that are due for revision today
   const getDueQuestions = async () => {
     try {
       const response = await questionApi.get("api/completed/due");
@@ -57,7 +57,7 @@ export function QuestionProvider({ children }) {
     }
   };
   //===========================================================================
-
+  // Get all questions from the database
   async function getAllQuestions() {
     setLoading(true);
     try {
@@ -69,12 +69,8 @@ export function QuestionProvider({ children }) {
     setLoading(false);
   }
 
-  const handleChange = async (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  // Find leetcode questions that match the search query
+  async function findLeets(name, value) {
     if (name === "title") {
       if (value !== "") {
         const response = await questionApi.post(
@@ -88,32 +84,16 @@ export function QuestionProvider({ children }) {
         setFoundLeets([]);
       }
     }
-  };
+  }
 
-  const handleTopicSelect = (topic) => {
+  // Handle changes in the form fields
+  const handleChange = async (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      topic, // update the topic field in formData
+      [name]: value,
     });
-  };
-
-  const handleSubmit = async (title, link, notes, difficulty, topic, tags) => {
-    //check if new question: if condition
-    //if question has been done before: else condition
-    let newQuestion = {
-      title: title,
-      link: link,
-      notes: notes,
-      difficulty: difficulty,
-      topic: topic,
-      tags: tags,
-    };
-    try {
-      await questionApi.post("/api/questions", newQuestion);
-    } catch (err) {
-      console.log(err);
-    }
-    return;
+    findLeets(name, value);
   };
 
   let context = {
@@ -124,9 +104,7 @@ export function QuestionProvider({ children }) {
     getAllQuestions,
     title,
     setTitle,
-    handleSubmit,
     handleChange,
-    handleTopicSelect,
     foundLeets,
     setFoundLeets,
     dueQuestions,
