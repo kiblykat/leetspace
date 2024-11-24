@@ -30,7 +30,7 @@ const QuestionList = () => {
       <div className="container mx-auto my-10 p-6 bg-base-200 rounded shadow-lg">
         <div className="rounded shadow-lg">
           <h1 className="label font-bold text-xl">
-            Questions due for revision today:{" "}
+            Questions due for revision today:
             <span className="text-orange-200">
               {`${new Date(Date.now()).toISOString().replace(/T.*/g, "")}`}
             </span>
