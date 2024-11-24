@@ -5,6 +5,7 @@ const ConfidenceTable = ({
   selectedQuestionId,
   setSelectedQuestionId,
   setPopupVisible,
+  dueQuestions,
 }) => {
   // Close the popup
   const closePopup = () => {
@@ -40,18 +41,22 @@ const ConfidenceTable = ({
   };
 
   return (
-    <div onClick={closePopup} className="z-50">
-      {/* Overlay */}
+    <div onClick={closePopup} className="z-40">
+      {/* Darkened Overlay */}
       <div className="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 
-      {/* Modal Content */}
-      <div className="fixed inset-0 flex items-center justify-center z-40">
+      {/* Popup Content */}
+      <div className="fixed inset-0 flex items-center justify-center z-50">
         <div
           className="bg-slate-600 p-6 rounded-lg shadow-lg max-w-sm w-full"
           onClick={(e) => e.stopPropagation()}
         >
           <h3 className="text-lg font-bold mb-4 text-orange-200">
-            {selectedQuestionId}
+            {
+              dueQuestions.find(
+                (question) => question._id === selectedQuestionId
+              ).title
+            }
           </h3>
           <p className="mb-4 text-white">
             How would you rate the difficulty of this question?

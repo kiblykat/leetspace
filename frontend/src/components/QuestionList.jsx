@@ -89,6 +89,7 @@ const QuestionList = () => {
           selectedQuestionId={selectedQuestionId}
           setSelectedQuestionId={setSelectedQuestionId}
           setPopupVisible={setPopupVisible}
+          dueQuestions={dueQuestions}
         />
       )}
     </>
