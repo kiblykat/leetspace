@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import questionApi from "../api/api";
 import toast from "react-hot-toast";
 
@@ -93,8 +93,22 @@ export function QuestionProvider({ children }) {
       ...formData,
       [name]: value,
     });
-    findLeets(name, value);
+    debouncedFindLeets(name, value); // Use the debounced function
   };
+
+  // Debounce Function
+  const debounce = (callback, delay = 1000) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout); // Clear any existing timeout
+      timeout = setTimeout(() => {
+        callback(...args); // Call the function after the delay
+      }, delay);
+    };
+  };
+
+  // impt: useCallback ensures the same instance of the function is used on every call
+  const debouncedFindLeets = useCallback(debounce(findLeets, 500), []);
 
   let context = {
     questions,
