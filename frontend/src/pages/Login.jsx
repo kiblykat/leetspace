@@ -2,15 +2,27 @@ import { useState } from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
+import questionApi from "../api/api";
 
 const Login = () => {
   let navigate = useNavigate();
   const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
   const handleGoogleLogin = async (e) => {
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      console.log(result);
+      const user = result.user;
+      setUser(user);
       setUserLoggedIn(true);
+
+      await questionApi.post("/users", {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+      });
       navigate("/home");
     } catch (err) {
       setError("Login failed. Please try again. ");
