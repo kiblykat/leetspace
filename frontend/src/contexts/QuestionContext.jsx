@@ -37,16 +37,11 @@ export function QuestionProvider({ children }) {
         tags: topic_tags,
         difficulty: difficulty,
       };
-      console.log(
-        `topic_tags is ${
-          newQuestion.tags
-        }, typeof topic_tags is ${typeof newQuestion.tags}`
-      );
+
       let response = await questionApi.post(
         "/api/completed/create",
         newQuestion
       );
-      console.log(`response is ${JSON.stringify(response.data)}`);
       toast.success(`${question} added to the repetition bank`, {
         duration: 3000,
       });
@@ -61,7 +56,6 @@ export function QuestionProvider({ children }) {
     setLoading(true);
     try {
       const response = await questionApi.get("/api/questions");
-      console.log(response);
     } catch (err) {
       console.log(err);
     }

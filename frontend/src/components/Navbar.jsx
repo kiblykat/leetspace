@@ -12,7 +12,6 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      console.log(auth);
       await signOut(auth);
       setUserLoggedIn(false);
       setUser(null);
@@ -26,7 +25,12 @@ const Navbar = () => {
       {!userLoggedIn && navigate("/login")}
       <div className="mx-auto rounded-lg container bg-base-200 mb-4">
         <div className="flex flex-row items-center justify-between p-4">
-          <div className="text-xl text-center align-middle">userProfile</div>
+          <div className="text-xl text-center align-middle">
+            Hello,{" "}
+            <span className="text-orange-300 font-semibold">
+              {user.displayName}
+            </span>
+          </div>
           <h1 className="text-3xl font-bold text-center font-mono">
             LeetSpace();
           </h1>

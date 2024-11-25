@@ -29,7 +29,6 @@ const ConfidenceTable = ({
     const currentCompleted = await questionApi.get(
       `/api/completed/${selectedQuestionId}`
     );
-    console.log(currentCompleted);
     const { _id, title, currentInterval } = currentCompleted.data;
 
     let questionToUpdate = {

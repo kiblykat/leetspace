@@ -13,7 +13,6 @@ const Login = () => {
     try {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
-      console.log(result);
       const user = result.user;
       setUser(user);
       setUserLoggedIn(true);

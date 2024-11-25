@@ -17,7 +17,6 @@ const QuestionList = () => {
   const openQuestionLink = async (id, link) => {
     try {
       window.open(link, "_blank");
-      console.log(id);
       setSelectedQuestionId(id); // Store the selected question
       setPopupVisible(true); // Show the popup
     } catch (err) {
