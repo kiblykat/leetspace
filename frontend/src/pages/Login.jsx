@@ -6,7 +6,7 @@ import questionApi from "../api/api";
 import UserContext from "../contexts/UserContext";
 
 const Login = () => {
-  const { userLoggedIn, setUserLoggedIn, user, setUser } =
+  const { userLoggedIn, setUserLoggedIn, user, setCurrentUser } =
     useContext(UserContext);
   let navigate = useNavigate();
   const handleGoogleLogin = async (e) => {
@@ -14,7 +14,7 @@ const Login = () => {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      setUser(user);
+      setCurrentUser(user);
       setUserLoggedIn(true);
 
       await questionApi.post("/users", {

@@ -4,13 +4,13 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
   const context = {
     userLoggedIn,
     setUserLoggedIn,
-    user,
-    setUser,
+    currentUser,
+    setCurrentUser,
   };
 
   return (
