@@ -7,14 +7,14 @@ import { signOut } from "firebase/auth";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { userLoggedIn, setUserLoggedIn, user, setUser } =
+  const { userLoggedIn, setUserLoggedIn, currentUser, setCurrentUser } =
     useContext(UserContext);
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
       setUserLoggedIn(false);
-      setUser(null);
+      setCurrentUser(null);
       navigate("/login");
     } catch (error) {
       console.error("Failed to logout", error.message);
@@ -28,7 +28,7 @@ const Navbar = () => {
           <div className="text-xl text-center align-middle">
             Hello,{" "}
             <span className="text-orange-300 font-semibold">
-              {user?.displayName}
+              {currentUser?.displayName}
             </span>
           </div>
           <h1 className="text-3xl font-bold text-center font-mono">
