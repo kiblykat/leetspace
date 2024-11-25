@@ -14,6 +14,11 @@ const ConfidenceTable = ({
     setSelectedQuestionId(null); // Clear the selected question
   };
 
+  // Find the selected question
+  const selectedQuestion = dueQuestions.find(
+    (question) => question._id === selectedQuestionId
+  );
+
   // Handle difficulty selection
   const handleDifficultySelection = async (userRecallDifficulty) => {
     console.log(
@@ -52,11 +57,7 @@ const ConfidenceTable = ({
           onClick={(e) => e.stopPropagation()}
         >
           <h3 className="text-lg font-bold mb-4 text-orange-200">
-            {
-              dueQuestions.find(
-                (question) => question._id === selectedQuestionId
-              ).title
-            }
+            {selectedQuestion.title}
           </h3>
           <p className="mb-4 text-white">
             How would you rate the difficulty of this question?
