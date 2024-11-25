@@ -13,7 +13,7 @@ const QuestionList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getDueQuestions(currentUser.uid);
+    getDueQuestions(currentUser?.uid);
   }, [getDueQuestions]);
 
   const openQuestionLink = async (id, link) => {
