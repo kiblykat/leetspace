@@ -9,7 +9,9 @@ const Login = () => {
   const handleGoogleLogin = async (e) => {
     try {
       const provider = new GoogleAuthProvider();
-      return await signInWithPopup(auth, provider);
+      await signInWithPopup(auth, provider);
+      setUserLoggedIn(true);
+      navigate("/home");
     } catch (err) {
       setError("Login failed. Please try again. ");
     }
