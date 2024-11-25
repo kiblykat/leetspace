@@ -8,11 +8,8 @@ const NewQuestion = () => {
 
   return (
     <div className="container mx-auto p-6 bg-base-200 rounded shadow-lg">
-      <h1 className="text-3xl font-bold mb-6 text-center">
-        LeetCode Spaced Repetition
-      </h1>
-      <p className="text-center mb-3">
-        This App applies spaced repetition to leetcode problems, similar to ANKI
+      <p className="text-center mb-3 font-mono">
+        Simplifying your Leetcode grind through spaced repetition
       </p>
       <form className="flex flex-col p-6 rounded shadow-lg">
         <div className="form-control">

@@ -78,7 +78,7 @@ const Bank = () => {
         </div>
         <div className="flex justify-end">
           <button
-            className="btn btn-primary mt-4 w-auto"
+            className="btn mt-4 w-auto text-black bg-orange-300 p-3 px-4 hover:bg-orange-400"
             onClick={() => navigate("/home")}
           >
             Back to Home
