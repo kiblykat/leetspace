@@ -31,8 +31,8 @@ export const getDueCompleteds = async (req, res) => {
 // Create a new completed
 export const createCompleted = async (req, res) => {
   try {
-    const { title, link, tags, difficulty } = req.body;
-    const existingCompleted = await completedModel.findOne({ title });
+    const { uid, title, link, tags, difficulty } = req.body;
+    const existingCompleted = await completedModel.findOne({ uid, title });
     if (existingCompleted)
       return res
         .status(400)
@@ -54,6 +54,7 @@ export const createCompleted = async (req, res) => {
     }
 
     const newCompleted = new completedModel({
+      uid,
       title,
       link,
       difficulty,

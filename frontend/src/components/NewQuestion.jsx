@@ -1,10 +1,10 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import QuestionContext from "../contexts/QuestionContext";
+import UserContext from "../contexts/UserContext";
 
 const NewQuestion = () => {
-  const questionCtx = useContext(QuestionContext);
-
-  const { handleChange, foundLeets, addNewQn } = questionCtx;
+  const { handleChange, foundLeets, addNewQn } = useContext(QuestionContext);
+  const { currentUser } = useContext(UserContext);
 
   return (
     <div className="container mx-auto p-6 bg-base-200 rounded shadow-lg">
@@ -39,6 +39,7 @@ const NewQuestion = () => {
                   className="hover:bg-gray-800 cursor-pointer"
                   onClick={() =>
                     addNewQn(
+                      currentUser.uid,
                       foundLeet.Question,
                       foundLeet.Question_Link,
                       foundLeet.Topic_tags,

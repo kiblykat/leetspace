@@ -29,9 +29,16 @@ export function QuestionProvider({ children }) {
 
   //======================== NEWQUESTION.JSX FUNCTIONS ========================
   //Add new question to the repetition bank
-  const addNewQn = async (question, question_link, topic_tags, difficulty) => {
+  const addNewQn = async (
+    uid,
+    question,
+    question_link,
+    topic_tags,
+    difficulty
+  ) => {
     try {
       let newQuestion = {
+        uid: uid,
         title: question,
         link: question_link,
         tags: topic_tags,

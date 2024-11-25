@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const completedSchema = new mongoose.Schema({
-  title: { type: String, required: true, unique: true },
+  uid: { type: String, required: true },
+  title: { type: String, required: true },
   link: { type: String, required: true },
   notes: { type: String, default: "" },
   difficulty: {
@@ -52,4 +53,5 @@ const completedSchema = new mongoose.Schema({
   },
 });
 
+completedSchema.index({ uid: 1, title: 1 }, { unique: true });
 export const completedModel = mongoose.model("Completed", completedSchema);
