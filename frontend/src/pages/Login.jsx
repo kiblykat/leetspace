@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import questionApi from "../api/api";
+import UserContext from "../contexts/UserContext";
 
 const Login = () => {
+  const { userLoggedIn, setUserLoggedIn, user, setUser } =
+    useContext(UserContext);
   let navigate = useNavigate();
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
   const handleGoogleLogin = async (e) => {
     try {
       const provider = new GoogleAuthProvider();

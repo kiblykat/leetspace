@@ -1,10 +1,29 @@
 import React from "react";
-
-const handleLogout = () => {};
+import { auth } from "../firebase/firebase";
+import { useContext } from "react";
+import UserContext from "../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const { userLoggedIn, setUserLoggedIn, user, setUser } =
+    useContext(UserContext);
+
+  const handleLogout = async () => {
+    try {
+      console.log(auth);
+      await signOut(auth);
+      setUserLoggedIn(false);
+      setUser(null);
+      navigate("/login");
+    } catch (error) {
+      console.error("Failed to logout", error.message);
+    }
+  };
   return (
     <>
+      {!userLoggedIn && navigate("/login")}
       <div className="mx-auto rounded-lg container bg-base-200 mb-4">
         <div className="flex flex-row items-center justify-between p-4">
           <div className="text-xl text-center align-middle">userProfile</div>
