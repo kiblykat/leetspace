@@ -16,9 +16,10 @@ export function QuestionProvider({ children }) {
 
   //======================== QUESTIONLIST.JSX FUNCTIONS ========================
   // Get all questions that are due for revision today
-  const getDueQuestions = async () => {
+  const getDueQuestions = async (uid) => {
     try {
-      const response = await questionApi.get("api/completed/due");
+      //pass uid here (this is on localhost:5000 not 5173)
+      const response = await questionApi.get(`api/completed/due/${uid}`);
       setDueQuestions(response.data);
     } catch (err) {
       console.log(err);

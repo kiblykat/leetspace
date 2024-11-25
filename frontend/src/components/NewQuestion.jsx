@@ -6,6 +6,10 @@ const NewQuestion = () => {
   const { handleChange, foundLeets, addNewQn } = useContext(QuestionContext);
   const { currentUser } = useContext(UserContext);
 
+  useEffect(() => {
+    console.log(currentUser);
+  }, []);
+
   return (
     <div className="container mx-auto p-6 bg-base-200 rounded shadow-lg">
       <p className="text-center mb-3 font-mono">

@@ -14,9 +14,11 @@ export const getCompleted = async (req, res) => {
 
 export const getDueCompleteds = async (req, res) => {
   try {
+    const { uid } = req.params;
     const today = new Date(); //get Current Date
     const dueQuestions = await completedModel
       .find({
+        uid: uid,
         reviewDate: { $lte: today },
       })
       .sort({ reviewDate: 1 })

@@ -2,16 +2,18 @@ import { useContext, useEffect, useState } from "react";
 import QuestionContext from "../contexts/QuestionContext.jsx";
 import ConfidenceTable from "./ConfidenceTable.jsx";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../contexts/UserContext.jsx";
 
 const QuestionList = () => {
   const [popupVisible, setPopupVisible] = useState(false);
   const [selectedQuestionId, setSelectedQuestionId] = useState("");
   const qnContext = useContext(QuestionContext);
   const { dueQuestions, getDueQuestions } = qnContext;
+  const { currentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getDueQuestions();
+    getDueQuestions(currentUser.uid);
   }, [getDueQuestions]);
 
   const openQuestionLink = async (id, link) => {

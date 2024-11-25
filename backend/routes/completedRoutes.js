@@ -13,7 +13,7 @@ import {
 const router = express.Router();
 
 router.get("/", getAllCompleteds);
-router.get("/due", getDueCompleteds);
+router.get("/due/:uid", getDueCompleteds);
 router.get("/:id", getCompleted);
 router.post("/create", createCompleted);
 router.post("/update", updateCompleted);
