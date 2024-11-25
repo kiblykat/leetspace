@@ -8,3 +8,11 @@ export const getUsers = async (req, res) => {
     res.status(500).json({ error: `${error}` });
   }
 };
+
+export const createUser = async (req, res) => {
+  try {
+    await userModel.create(req.body);
+  } catch (error) {
+    res.status(500).json({ error: `${error}` });
+  }
+};
