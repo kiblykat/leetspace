@@ -1,17 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import questionApi from "../api/api";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../contexts/UserContext";
 
 const Bank = () => {
   const [bankQuestions, setBankQuestions] = useState([]);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
+  const { currentUser } = useContext(UserContext);
+
   let handleSearch = (e) => {};
 
   let getRevisionBank = async () => {
     try {
-      const response = await questionApi.get("/api/completed");
+      const response = await questionApi.get(
+        `/api/completed/${currentUser.uid}`
+      );
       setBankQuestions(response.data);
     } catch (err) {
       console.log(err);

@@ -76,7 +76,10 @@ export const createCompleted = async (req, res) => {
 // Get all completeds
 export const getAllCompleteds = async (req, res) => {
   try {
-    const completeds = await completedModel.find();
+    const { uid } = req.params;
+    const completeds = await completedModel
+      .find({ uid })
+      .sort({ reviewDate: 1 });
     res.json(completeds);
   } catch (error) {
     res.status(500).json({ error: error });

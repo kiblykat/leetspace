@@ -12,7 +12,7 @@ import {
 
 const router = express.Router();
 
-router.get("/", getAllCompleteds);
+router.get("/:uid", getAllCompleteds);
 router.get("/due/:uid", getDueCompleteds);
 router.get("/:id", getCompleted);
 router.post("/create", createCompleted);
