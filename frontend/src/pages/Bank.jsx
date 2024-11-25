@@ -12,7 +12,6 @@ const Bank = () => {
   let getRevisionBank = async () => {
     try {
       const response = await questionApi.get("/api/completed");
-      console.log(response);
       setBankQuestions(response.data);
     } catch (err) {
       console.log(err);

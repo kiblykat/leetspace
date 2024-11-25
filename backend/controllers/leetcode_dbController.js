@@ -13,16 +13,12 @@ export const getMatchingLeets = async (req, res) => {
   try {
     const { value } = req.body;
 
-    // Log the received value
-    // console.log(`Search value: ${value}`);
-
     // Use a case-insensitive regex to find partial matches in the 'Question' field
-    const response = await leetcode_dbModel.find({
-      Question: { $regex: value, $options: "i" }
-    }).limit(5);
-
-    // Log the response for debugging
-    // console.log(`Matching questions: ${response}`);
+    const response = await leetcode_dbModel
+      .find({
+        Question: { $regex: value, $options: "i" },
+      })
+      .limit(5);
 
     res.status(200).json(response);
   } catch (err) {
