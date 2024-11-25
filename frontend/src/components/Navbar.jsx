@@ -28,7 +28,7 @@ const Navbar = () => {
           <div className="text-xl text-center align-middle">
             Hello,{" "}
             <span className="text-orange-300 font-semibold">
-              {user.displayName}
+              {user?.displayName}
             </span>
           </div>
           <h1 className="text-3xl font-bold text-center font-mono">
