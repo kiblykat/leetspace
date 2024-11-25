@@ -20,9 +20,9 @@ const Navbar = () => {
       console.error("Failed to logout", error.message);
     }
   };
+
   return (
     <>
-      {!userLoggedIn && navigate("/login")}
       <div className="mx-auto rounded-lg container bg-base-200 mb-4">
         <div className="flex flex-row items-center justify-between p-4">
           <div className="text-xl text-center align-middle">
