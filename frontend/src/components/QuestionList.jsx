@@ -44,12 +44,12 @@ const QuestionList = () => {
             {/* Table Head */}
             <thead>
               <tr>
-                <th className="text-cyan-800">#</th>
-                <th className="text-cyan-800">Title</th>
-                <th className="text-cyan-800">Last Reviewed</th>
-                <th className="text-cyan-800">Tags</th>
-                <th className="text-cyan-800">Difficulty</th>
-                <th className="text-cyan-800">Revision Count</th>
+                <th className="text-cyan-700">#</th>
+                <th className="text-cyan-700">Title</th>
+                <th className="text-cyan-700">Last Reviewed</th>
+                <th className="text-cyan-700">Tags</th>
+                <th className="text-cyan-700">Difficulty</th>
+                <th className="text-cyan-700">Revision Count</th>
               </tr>
             </thead>
             {/* Table Body */}

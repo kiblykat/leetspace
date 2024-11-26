@@ -56,12 +56,12 @@ const Bank = () => {
             {/* Table Head */}
             <thead>
               <tr>
-                <th className="text-cyan-800">#</th>
-                <th className="text-cyan-800">Title</th>
-                <th className="text-cyan-800">Tags</th>
-                <th className="text-cyan-800">Difficulty</th>
-                <th className="text-cyan-800">Next Review</th>
-                <th className="text-cyan-800">Review Count</th>
+                <th className="text-cyan-700">#</th>
+                <th className="text-cyan-700">Title</th>
+                <th className="text-cyan-700">Tags</th>
+                <th className="text-cyan-700">Difficulty</th>
+                <th className="text-cyan-700">Next Review</th>
+                <th className="text-cyan-700">Review Count</th>
               </tr>
             </thead>
             {/* Table Body */}

@@ -27,9 +27,9 @@ const NewQuestion = () => {
           <table className="table table-auto ">
             <thead>
               <tr>
-                <th className="text-cyan-800">Title</th>
-                <th className="text-cyan-800">Difficulty</th>
-                <th className="text-cyan-800">Tags</th>
+                <th className="text-cyan-700">Title</th>
+                <th className="text-cyan-700">Difficulty</th>
+                <th className="text-cyan-700">Tags</th>
               </tr>
             </thead>
             <tbody>
