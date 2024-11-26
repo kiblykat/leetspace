@@ -1,6 +1,15 @@
 import { userModel } from "../models/User.js";
 
-export const getUsers = async (req, res) => {
+export const getUser = async (req, res) => {
+  try {
+    const uid = req.params.id;
+    const response = await userModel.findOne({ uid: uid });
+    return res.status(200).json(response);
+  } catch (err) {
+    res.status(500).json({ error: `${err}` });
+  }
+};
+export const getAllUsers = async (req, res) => {
   try {
     const response = await userModel.find();
     return res.status(200).json(response);
@@ -12,7 +21,7 @@ export const getUsers = async (req, res) => {
 export const createUser = async (req, res) => {
   try {
     const userExists = await userModel.findOne({ uid: req.body.uid });
-    if(!userExists) {
+    if (!userExists) {
       await userModel.create(req.body);
     }
   } catch (error) {

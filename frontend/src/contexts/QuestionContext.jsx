@@ -6,9 +6,9 @@ let QuestionContext = createContext();
 
 export function QuestionProvider({ children }) {
   const [questions, setQuestions] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [foundLeets, setFoundLeets] = useState([]);
   const [title, setTitle] = useState("");
+  const [loading, setLoading] = useState(true);
 
   //======================== QUESTIONLIST.JSX STATES ========================
   let [dueQuestions, setDueQuestions] = useState([]);
@@ -18,9 +18,15 @@ export function QuestionProvider({ children }) {
   // Get all questions that are due for revision today
   const getDueQuestions = async (uid) => {
     try {
-      //pass uid here (this is on localhost:5000 not 5173)
-      const response = await leetspaceApi.get(`api/completed/due/${uid}`);
-      setDueQuestions(response.data);
+      setLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 5000)); // Waits for 5 seconds
+      if (uid !== undefined) {
+        console.log("Getting due questions for user with uid:", uid);
+        //pass uid here (this is on localhost:5000 not 5173)
+        const response = await leetspaceApi.get(`api/completed/due/${uid}`);
+        setDueQuestions(response.data);
+      }
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }

@@ -16,13 +16,16 @@ const Login = () => {
       const user = result.user;
       setCurrentUser(user);
       setUserLoggedIn(true);
-
-      await leetspaceApi.post("/api/users", {
-        uid: user.uid,
-        email: user.email,
-        displayName: user.displayName,
-        photoURL: user.photoURL,
-      });
+      let userExists = await leetspaceApi.get(`/api/users/${user.uid}`);
+      if (!userExists) {
+        await leetspaceApi.post("/api/users", {
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+        });
+      }
+      console.log("Login successful. Welcome", user.displayName);
       navigate("/home");
     } catch (err) {
       console.log("Login failed. Please try again.", err.message);

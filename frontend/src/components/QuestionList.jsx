@@ -8,13 +8,16 @@ const QuestionList = () => {
   const [popupVisible, setPopupVisible] = useState(false);
   const [selectedQuestionId, setSelectedQuestionId] = useState("");
   const qnContext = useContext(QuestionContext);
-  const { dueQuestions, getDueQuestions } = qnContext;
+  const { loading, setLoading, dueQuestions, getDueQuestions } = qnContext;
   const { currentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     getDueQuestions(currentUser?.uid);
-  }, [getDueQuestions]);
+    if (currentUser?.uid !== undefined) {
+      console.log("Getting due questions for user with uid:", currentUser.uid);
+    }
+  }, []);
 
   const openQuestionLink = async (id, link) => {
     try {
@@ -50,29 +53,40 @@ const QuestionList = () => {
               </tr>
             </thead>
             {/* Table Body */}
-            <tbody>
-              {dueQuestions.map((dueQuestion, index) => (
-                <tr
-                  key={dueQuestion._id}
-                  className="hover:bg-base-300 btn-ghost cursor-pointer z-10"
-                  onClick={() =>
-                    openQuestionLink(dueQuestion._id, dueQuestion.link)
-                  }
+            {loading ? (
+              <div className="flex justify-center items-center">
+                <div
+                  className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+                  role="status"
                 >
-                  <td>{index + 1}</td>
-                  <td>{dueQuestion.title}</td>
-                  <td className="text-orange-200">
-                    {dueQuestion.reviewDate.slice(
-                      0,
-                      dueQuestion.reviewDate.indexOf("T")
-                    )}
-                  </td>
-                  <td>{dueQuestion.tags.replace(/[[\]']/g, "")}</td>
-                  <td>{dueQuestion.difficulty}</td>
-                  <td>{dueQuestion.reviewCount}</td>
-                </tr>
-              ))}
-            </tbody>
+                  <span className="visually-hidden">||</span>
+                </div>
+              </div>
+            ) : (
+              <tbody>
+                {dueQuestions.map((dueQuestion, index) => (
+                  <tr
+                    key={dueQuestion._id}
+                    className="hover:bg-base-300 btn-ghost cursor-pointer z-10"
+                    onClick={() =>
+                      openQuestionLink(dueQuestion._id, dueQuestion.link)
+                    }
+                  >
+                    <td>{index + 1}</td>
+                    <td>{dueQuestion.title}</td>
+                    <td className="text-orange-200">
+                      {dueQuestion.reviewDate.slice(
+                        0,
+                        dueQuestion.reviewDate.indexOf("T")
+                      )}
+                    </td>
+                    <td>{dueQuestion.tags.replace(/[[\]']/g, "")}</td>
+                    <td>{dueQuestion.difficulty}</td>
+                    <td>{dueQuestion.reviewCount}</td>
+                  </tr>
+                ))}
+              </tbody>
+            )}
           </table>
         </div>
         <div className="flex justify-center m-5">
