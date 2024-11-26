@@ -25,7 +25,7 @@ const Login = () => {
       });
       navigate("/home");
     } catch (err) {
-      setError("Login failed. Please try again. ");
+      console.log("Login failed. Please try again.", err.message);
     }
   };
 
