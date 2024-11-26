@@ -19,7 +19,6 @@ export function QuestionProvider({ children }) {
   const getDueQuestions = async (uid) => {
     try {
       setLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 5000)); // Waits for 5 seconds
       if (uid !== undefined) {
         console.log("Getting due questions for user with uid:", uid);
         //pass uid here (this is on localhost:5000 not 5173)
