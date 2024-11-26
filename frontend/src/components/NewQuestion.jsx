@@ -11,8 +11,8 @@ const NewQuestion = () => {
       <p className="text-center mb-3 font-mono">
         Simplifying your Leetcode grind through spaced repetition
       </p>
-      <form className="flex flex-col p-6 rounded shadow-lg">
-        <div className="form-control">
+      <div className="flex flex-col p-6 rounded shadow-lg">
+        <div className="flex flex-col">
           <label className="label font-bold text-xl">
             Add Leetcode Question to Repetition Bank:
           </label>
@@ -55,7 +55,7 @@ const NewQuestion = () => {
             </tbody>
           </table>
         </div>
-      </form>
+      </div>
     </div>
   );
 };
