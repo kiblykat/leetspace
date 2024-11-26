@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
-import questionApi from "../api/api";
+import leetspaceApi from "../api/api";
 import UserContext from "../contexts/UserContext";
 
 const Login = () => {
@@ -17,7 +17,7 @@ const Login = () => {
       setCurrentUser(user);
       setUserLoggedIn(true);
 
-      await questionApi.post("/users", {
+      await leetspaceApi.post("/users", {
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,

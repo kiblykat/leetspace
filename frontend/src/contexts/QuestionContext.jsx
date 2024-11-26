@@ -1,5 +1,5 @@
 import { createContext, useCallback, useState } from "react";
-import questionApi from "../api/api";
+import leetspaceApi from "../api/api";
 import toast from "react-hot-toast";
 
 let QuestionContext = createContext();
@@ -19,7 +19,7 @@ export function QuestionProvider({ children }) {
   const getDueQuestions = async (uid) => {
     try {
       //pass uid here (this is on localhost:5000 not 5173)
-      const response = await questionApi.get(`api/completed/due/${uid}`);
+      const response = await leetspaceApi.get(`api/completed/due/${uid}`);
       setDueQuestions(response.data);
     } catch (err) {
       console.log(err);
@@ -46,7 +46,7 @@ export function QuestionProvider({ children }) {
         difficulty: difficulty,
       };
 
-      let response = await questionApi.post(
+      let response = await leetspaceApi.post(
         "/api/completed/create",
         newQuestion
       );
@@ -63,7 +63,7 @@ export function QuestionProvider({ children }) {
   async function getAllQuestions() {
     setLoading(true);
     try {
-      const response = await questionApi.get("/api/questions");
+      const response = await leetspaceApi.get("/api/questions");
     } catch (err) {
       console.log(err);
     }
@@ -92,7 +92,7 @@ export function QuestionProvider({ children }) {
   // Find leetcode questions that match the search query
   async function findLeets(value) {
     if (value !== "") {
-      const response = await questionApi.post(
+      const response = await leetspaceApi.post(
         "/api/leetcode_db/find-matching",
         {
           value,

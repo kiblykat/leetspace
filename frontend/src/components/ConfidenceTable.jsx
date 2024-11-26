@@ -1,4 +1,4 @@
-import questionApi from "../api/api";
+import leetspaceApi from "../api/api";
 import toast from "react-hot-toast";
 
 const ConfidenceTable = ({
@@ -26,7 +26,7 @@ const ConfidenceTable = ({
       selectedQuestionId
     );
     // get ID and currentInterval from the selectedQuestionId
-    const currentCompleted = await questionApi.get(
+    const currentCompleted = await leetspaceApi.get(
       `/api/completed/${selectedQuestionId}`
     );
     const { _id, title, currentInterval } = currentCompleted.data;
@@ -37,7 +37,7 @@ const ConfidenceTable = ({
       currentInterval,
     };
 
-    await questionApi.post("/api/completed/update", questionToUpdate);
+    await leetspaceApi.post("/api/completed/update", questionToUpdate);
     toast.success(`${title} marked as revised`, {
       duration: 3000,
     });

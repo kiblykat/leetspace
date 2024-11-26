@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import questionApi from "../api/api";
+import leetspaceApi from "../api/api";
 import { Navigate, useNavigate } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 
@@ -14,7 +14,7 @@ const Bank = () => {
 
   let getRevisionBank = async () => {
     try {
-      const response = await questionApi.get(
+      const response = await leetspaceApi.get(
         `/api/completed/${currentUser.uid}`
       );
       setBankQuestions(response.data);
