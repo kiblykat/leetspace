@@ -17,7 +17,7 @@ const Login = () => {
       setCurrentUser(user);
       setUserLoggedIn(true);
 
-      await leetspaceApi.post("/users", {
+      await leetspaceApi.post("/api/users", {
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
@@ -29,14 +29,11 @@ const Login = () => {
     }
   };
 
-  useEffect(
-    (userLoggedIn) => {
-      if (userLoggedIn) {
-        navigate("/home");
-      }
-    },
-    [userLoggedIn]
-  );
+  useEffect(() => {
+    if (userLoggedIn) {
+      navigate("/home");
+    }
+  }, [userLoggedIn, navigate]);
 
   return (
     <div className="container mx-auto p-6 bg-base-200 rounded shadow-lg flex flex-col justify-center items-center min-h-screen">

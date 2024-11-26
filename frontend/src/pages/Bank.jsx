@@ -14,23 +14,22 @@ const Bank = () => {
 
   let getRevisionBank = async () => {
     try {
-      const response = await leetspaceApi.get(
-        `/api/completed/${currentUser.uid}`
-      );
-      setBankQuestions(response.data);
+      if (currentUser !== null) {
+        const response = await leetspaceApi.get(
+          `/api/completed/${currentUser?.uid}`
+        );
+        setBankQuestions(response.data);
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
-  useEffect(
-    (userLoggedIn) => {
-      if (!userLoggedIn) {
-        navigate("/login");
-      }
-    },
-    [userLoggedIn]
-  );
+  useEffect(() => {
+    if (!userLoggedIn) {
+      navigate("/login");
+    }
+  }, [userLoggedIn, navigate]);
 
   useEffect(() => {
     getRevisionBank();
