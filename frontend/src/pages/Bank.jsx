@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import questionApi from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 
 const Bank = () => {
@@ -8,7 +8,7 @@ const Bank = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, userLoggedIn } = useContext(UserContext);
 
   let handleSearch = (e) => {};
 
@@ -22,6 +22,15 @@ const Bank = () => {
       console.log(err);
     }
   };
+
+  useEffect(
+    (userLoggedIn) => {
+      if (!userLoggedIn) {
+        navigate("/login");
+      }
+    },
+    [userLoggedIn]
+  );
 
   useEffect(() => {
     getRevisionBank();
