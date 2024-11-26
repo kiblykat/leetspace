@@ -27,7 +27,7 @@ const Navbar = () => {
         <div className="flex flex-row items-center justify-between p-4">
           <div className="text-xl text-center align-middle">
             Hello,{" "}
-            <span className="text-orange-300 font-semibold">
+            <span className="text-orange-400 font-semibold">
               {currentUser?.displayName}
             </span>
           </div>

@@ -35,7 +35,7 @@ const QuestionList = () => {
         <div className="rounded shadow-lg">
           <h1 className="label font-bold text-xl">
             Questions due for revision today:
-            <span className="text-orange-200">
+            <span className="text-orange-400">
               {`${new Date(Date.now()).toISOString().replace(/T.*/g, "")}`}
             </span>
           </h1>
@@ -44,12 +44,12 @@ const QuestionList = () => {
             {/* Table Head */}
             <thead>
               <tr>
-                <th>#</th>
-                <th>Title</th>
-                <th>Last Reviewed</th>
-                <th>Tags</th>
-                <th>Difficulty</th>
-                <th>Revision Count</th>
+                <th className="text-cyan-800">#</th>
+                <th className="text-cyan-800">Title</th>
+                <th className="text-cyan-800">Last Reviewed</th>
+                <th className="text-cyan-800">Tags</th>
+                <th className="text-cyan-800">Difficulty</th>
+                <th className="text-cyan-800">Revision Count</th>
               </tr>
             </thead>
             {/* Table Body */}
@@ -59,7 +59,7 @@ const QuestionList = () => {
                   className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
                   role="status"
                 >
-                  <span className="visually-hidden">||</span>
+                  <span className="">||</span>
                 </div>
               </div>
             ) : (
@@ -67,22 +67,24 @@ const QuestionList = () => {
                 {dueQuestions.map((dueQuestion, index) => (
                   <tr
                     key={dueQuestion._id}
-                    className="hover:bg-base-300 btn-ghost cursor-pointer z-10"
+                    className="hover:bg-base-300 border-gray-300 cursor-pointer z-10"
                     onClick={() =>
                       openQuestionLink(dueQuestion._id, dueQuestion.link)
                     }
                   >
-                    <td>{index + 1}</td>
-                    <td>{dueQuestion.title}</td>
-                    <td className="text-orange-200">
+                    <td className="p-4">{index + 1}</td>
+                    <td className="p-4">{dueQuestion.title}</td>
+                    <td className="p-4 font-semibold text-orange-400">
                       {dueQuestion.reviewDate.slice(
                         0,
                         dueQuestion.reviewDate.indexOf("T")
                       )}
                     </td>
-                    <td>{dueQuestion.tags.replace(/[[\]']/g, "")}</td>
-                    <td>{dueQuestion.difficulty}</td>
-                    <td>{dueQuestion.reviewCount}</td>
+                    <td className="p-4">
+                      {dueQuestion.tags.replace(/[[\]']/g, "")}
+                    </td>
+                    <td className="p-4">{dueQuestion.difficulty}</td>
+                    <td className="p-4">{dueQuestion.reviewCount}</td>
                   </tr>
                 ))}
               </tbody>

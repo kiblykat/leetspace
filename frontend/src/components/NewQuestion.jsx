@@ -27,16 +27,16 @@ const NewQuestion = () => {
           <table className="table table-auto ">
             <thead>
               <tr>
-                <th>Title</th>
-                <th>Difficulty</th>
-                <th>Tags</th>
+                <th className="text-cyan-800">Title</th>
+                <th className="text-cyan-800">Difficulty</th>
+                <th className="text-cyan-800">Tags</th>
               </tr>
             </thead>
             <tbody>
               {foundLeets?.map((foundLeet) => (
                 <tr
                   key={foundLeet.Question}
-                  className="hover:bg-gray-800 cursor-pointer"
+                  className="hover:bg-base-300 cursor-pointer border-gray-300 "
                   onClick={() =>
                     addNewQn(
                       currentUser.uid,
@@ -47,9 +47,11 @@ const NewQuestion = () => {
                     )
                   }
                 >
-                  <td>{foundLeet.Question}</td>
-                  <td>{foundLeet.Difficulty}</td>
-                  <td>{foundLeet.Topic_tags.replace(/[[\]']/g, "")}</td>
+                  <td className="p-4">{foundLeet.Question}</td>
+                  <td className="p-4">{foundLeet.Difficulty}</td>
+                  <td className="p-4">
+                    {foundLeet.Topic_tags.replace(/[[\]']/g, "")}
+                  </td>
                 </tr>
               ))}
             </tbody>
