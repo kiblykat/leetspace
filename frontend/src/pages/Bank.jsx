@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import leetspaceApi from "../api/api";
 import { Navigate, useNavigate } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
+import QuestionContext from "../contexts/QuestionContext";
 
 const Bank = () => {
   const [bankQuestions, setBankQuestions] = useState([]);
@@ -10,16 +11,18 @@ const Bank = () => {
 
   const { currentUser, userLoggedIn } = useContext(UserContext);
 
-  let handleSearch = (e) => {};
+  const { loading, setLoading } = useContext(QuestionContext);
 
   let getRevisionBank = async () => {
     try {
+      setLoading(true);
       if (currentUser !== null) {
         const response = await leetspaceApi.get(
           `/api/completed/${currentUser?.uid}`
         );
         setBankQuestions(response.data);
       }
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -62,30 +65,41 @@ const Bank = () => {
               </tr>
             </thead>
             {/* Table Body */}
-            <tbody>
-              {bankQuestions
-                .filter((question) =>
-                  question.title.toLowerCase().includes(search.toLowerCase())
-                )
-                .map((question, index) => (
-                  <tr
-                    key={question._id}
-                    className="hover:bg-base-300 btn-ghost cursor-pointer z-10"
-                  >
-                    <td>{index + 1}</td>
-                    <td>{question.title}</td>
-                    <td>{question.tags}</td>
-                    <td>{question.difficulty}</td>
-                    <td>
-                      {question.reviewDate.slice(
-                        0,
-                        question.reviewDate.indexOf("T")
-                      )}
-                    </td>
-                    <td>{question.reviewCount}</td>
-                  </tr>
-                ))}
-            </tbody>
+            {loading ? (
+              <div className="flex justify-center items-center">
+                <div
+                  className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+                  role="status"
+                >
+                  <span className="visually-hidden">||</span>
+                </div>
+              </div>
+            ) : (
+              <tbody>
+                {bankQuestions
+                  .filter((question) =>
+                    question.title.toLowerCase().includes(search.toLowerCase())
+                  )
+                  .map((question, index) => (
+                    <tr
+                      key={question._id}
+                      className="hover:bg-base-300 btn-ghost cursor-pointer z-10"
+                    >
+                      <td>{index + 1}</td>
+                      <td>{question.title}</td>
+                      <td>{question.tags}</td>
+                      <td>{question.difficulty}</td>
+                      <td>
+                        {question.reviewDate.slice(
+                          0,
+                          question.reviewDate.indexOf("T")
+                        )}
+                      </td>
+                      <td>{question.reviewCount}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            )}
           </table>
         </div>
         <div className="flex justify-end">
