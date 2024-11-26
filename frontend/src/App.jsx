@@ -1,4 +1,4 @@
-import { Routes, HashRouter, Route, useNavigate } from "react-router-dom";
+import { Routes, HashRouter, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Bank from "./pages/Bank";
 import RootLayout from "./layouts/RootLayout";
