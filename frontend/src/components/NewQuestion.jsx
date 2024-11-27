@@ -24,38 +24,40 @@ const NewQuestion = () => {
             onChange={handleChange}
             required
           />
-          <table className="table table-auto ">
-            <thead>
-              <tr>
-                <th className="text-cyan-700">Title</th>
-                <th className="text-cyan-700">Difficulty</th>
-                <th className="text-cyan-700">Tags</th>
-              </tr>
-            </thead>
-            <tbody>
-              {foundLeets?.map((foundLeet) => (
-                <tr
-                  key={foundLeet.Question}
-                  className="hover:bg-base-300 cursor-pointer border-gray-300 "
-                  onClick={() =>
-                    addNewQn(
-                      currentUser.uid,
-                      foundLeet.Question,
-                      foundLeet.Question_Link,
-                      foundLeet.Topic_tags,
-                      foundLeet.Difficulty
-                    )
-                  }
-                >
-                  <td className="p-4">{foundLeet.Question}</td>
-                  <td className="p-4">{foundLeet.Difficulty}</td>
-                  <td className="p-4">
-                    {foundLeet.Topic_tags.replace(/[[\]']/g, "")}
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="table table-auto ">
+              <thead>
+                <tr>
+                  <th className="text-cyan-700">Title</th>
+                  <th className="text-cyan-700">Difficulty</th>
+                  <th className="text-cyan-700">Tags</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {foundLeets?.map((foundLeet) => (
+                  <tr
+                    key={foundLeet.Question}
+                    className="hover:bg-base-300 cursor-pointer border-gray-300 "
+                    onClick={() =>
+                      addNewQn(
+                        currentUser.uid,
+                        foundLeet.Question,
+                        foundLeet.Question_Link,
+                        foundLeet.Topic_tags,
+                        foundLeet.Difficulty
+                      )
+                    }
+                  >
+                    <td className="p-4">{foundLeet.Question}</td>
+                    <td className="p-4">{foundLeet.Difficulty}</td>
+                    <td className="p-4">
+                      {foundLeet.Topic_tags.replace(/[[\]']/g, "")}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

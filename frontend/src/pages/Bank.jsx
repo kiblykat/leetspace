@@ -57,55 +57,59 @@ const Bank = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
           <div className="flex align-middle justify-center"></div>
-          <table className="table table-auto w-full">
-            {/* Table Head */}
-            <thead>
-              <tr>
-                <th className="text-cyan-700">#</th>
-                <th className="text-cyan-700">Title</th>
-                <th className="text-cyan-700">Tags</th>
-                <th className="text-cyan-700">Difficulty</th>
-                <th className="text-cyan-700">Next Review</th>
-                <th className="text-cyan-700">Review Count</th>
-              </tr>
-            </thead>
-            {/* Table Body */}
-            {loading ? (
-              <div className="flex justify-center items-center">
-                <div
-                  className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
-                  role="status"
-                >
-                  <span className="visually-hidden">||</span>
+          <div className="overflow-x-auto">
+            <table className="table table-auto w-full">
+              {/* Table Head */}
+              <thead>
+                <tr>
+                  <th className="text-cyan-700">#</th>
+                  <th className="text-cyan-700">Title</th>
+                  <th className="text-cyan-700">Tags</th>
+                  <th className="text-cyan-700">Difficulty</th>
+                  <th className="text-cyan-700">Next Review</th>
+                  <th className="text-cyan-700">Review Count</th>
+                </tr>
+              </thead>
+              {/* Table Body */}
+              {loading ? (
+                <div className="flex justify-center items-center">
+                  <div
+                    className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+                    role="status"
+                  >
+                    <span className="visually-hidden">||</span>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <tbody>
-                {bankQuestions
-                  .filter((question) =>
-                    question.title.toLowerCase().includes(search.toLowerCase())
-                  )
-                  .map((question, index) => (
-                    <tr
-                      key={question._id}
-                      className="hover:bg-base-300 btn-ghost cursor-pointer z-10"
-                    >
-                      <td>{index + 1}</td>
-                      <td>{question.title}</td>
-                      <td>{question.tags}</td>
-                      <td>{question.difficulty}</td>
-                      <td>
-                        {question.reviewDate.slice(
-                          0,
-                          question.reviewDate.indexOf("T")
-                        )}
-                      </td>
-                      <td>{question.reviewCount}</td>
-                    </tr>
-                  ))}
-              </tbody>
-            )}
-          </table>
+              ) : (
+                <tbody>
+                  {bankQuestions
+                    .filter((question) =>
+                      question.title
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    )
+                    .map((question, index) => (
+                      <tr
+                        key={question._id}
+                        className="hover:bg-base-300 btn-ghost cursor-pointer z-10"
+                      >
+                        <td>{index + 1}</td>
+                        <td>{question.title}</td>
+                        <td>{question.tags}</td>
+                        <td>{question.difficulty}</td>
+                        <td>
+                          {question.reviewDate.slice(
+                            0,
+                            question.reviewDate.indexOf("T")
+                          )}
+                        </td>
+                        <td>{question.reviewCount}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              )}
+            </table>
+          </div>
         </div>
         <div className="flex justify-end">
           <button

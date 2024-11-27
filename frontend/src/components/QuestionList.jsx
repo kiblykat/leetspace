@@ -37,56 +37,58 @@ const QuestionList = () => {
             </span>
           </h1>
           <div className="flex align-middle justify-center"></div>
-          <table className="table table-auto w-full">
-            {/* Table Head */}
-            <thead>
-              <tr>
-                <th className="text-cyan-700">#</th>
-                <th className="text-cyan-700">Title</th>
-                <th className="text-cyan-700">Last Reviewed</th>
-                <th className="text-cyan-700">Tags</th>
-                <th className="text-cyan-700">Difficulty</th>
-                <th className="text-cyan-700">Revision Count</th>
-              </tr>
-            </thead>
-            {/* Table Body */}
-            {loading ? (
-              <div className="flex justify-center items-center">
-                <div
-                  className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
-                  role="status"
-                >
-                  <span className="">||</span>
-                </div>
-              </div>
-            ) : (
-              <tbody>
-                {dueQuestions.map((dueQuestion, index) => (
-                  <tr
-                    key={dueQuestion._id}
-                    className="hover:bg-base-300 border-gray-300 cursor-pointer z-10"
-                    onClick={() =>
-                      openQuestionLink(dueQuestion._id, dueQuestion.link)
-                    }
+          <div className="overflow-x-auto">
+            <table className="table table-auto w-full">
+              {/* Table Head */}
+              <thead>
+                <tr>
+                  <th className="text-cyan-700">#</th>
+                  <th className="text-cyan-700">Title</th>
+                  <th className="text-cyan-700">Last Reviewed</th>
+                  <th className="text-cyan-700">Tags</th>
+                  <th className="text-cyan-700">Difficulty</th>
+                  <th className="text-cyan-700">Revision Count</th>
+                </tr>
+              </thead>
+              {/* Table Body */}
+              {loading ? (
+                <div className="flex justify-center items-center">
+                  <div
+                    className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+                    role="status"
                   >
-                    <td className="p-4">{index + 1}</td>
-                    <td className="p-4">{dueQuestion.title}</td>
-                    <td className="p-4 font-semibold text-orange-400">
-                      {dueQuestion.reviewDate.slice(
-                        0,
-                        dueQuestion.reviewDate.indexOf("T")
-                      )}
-                    </td>
-                    <td className="p-4">
-                      {dueQuestion.tags.replace(/[[\]']/g, "")}
-                    </td>
-                    <td className="p-4">{dueQuestion.difficulty}</td>
-                    <td className="p-4">{dueQuestion.reviewCount}</td>
-                  </tr>
-                ))}
-              </tbody>
-            )}
-          </table>
+                    <span className="">||</span>
+                  </div>
+                </div>
+              ) : (
+                <tbody>
+                  {dueQuestions.map((dueQuestion, index) => (
+                    <tr
+                      key={dueQuestion._id}
+                      className="hover:bg-base-300 border-gray-300 cursor-pointer z-10"
+                      onClick={() =>
+                        openQuestionLink(dueQuestion._id, dueQuestion.link)
+                      }
+                    >
+                      <td className="p-4">{index + 1}</td>
+                      <td className="p-4">{dueQuestion.title}</td>
+                      <td className="p-4 font-semibold text-orange-400">
+                        {dueQuestion.reviewDate.slice(
+                          0,
+                          dueQuestion.reviewDate.indexOf("T")
+                        )}
+                      </td>
+                      <td className="p-4">
+                        {dueQuestion.tags.replace(/[[\]']/g, "")}
+                      </td>
+                      <td className="p-4">{dueQuestion.difficulty}</td>
+                      <td className="p-4">{dueQuestion.reviewCount}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              )}
+            </table>
+          </div>
         </div>
         <div className="flex justify-center m-5">
           <button
