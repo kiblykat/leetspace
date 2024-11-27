@@ -6,7 +6,7 @@ import leetspaceApi from "../api/api";
 import UserContext from "../contexts/UserContext";
 
 const Login = () => {
-  const { userLoggedIn, setUserLoggedIn, user, setCurrentUser } =
+  const { userLoggedIn, setUserLoggedIn, setCurrentUser } =
     useContext(UserContext);
   let navigate = useNavigate();
   const handleGoogleLogin = async (e) => {
@@ -14,8 +14,12 @@ const Login = () => {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
+      //set user and userLoggedIn states
       setCurrentUser(user);
       setUserLoggedIn(true);
+      //set localStorage (prevent loss of state on refresh)
+      localStorage.setItem("localStorage_userLoggedIn", "true");
+      localStorage.setItem("localStorage_currentUser", JSON.stringify(user));
       let userExists = await leetspaceApi.get(`/api/users/${user.uid}`);
       if (!userExists) {
         await leetspaceApi.post("/api/users", {

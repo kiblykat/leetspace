@@ -16,9 +16,12 @@ const Bank = () => {
   let getRevisionBank = async () => {
     try {
       setLoading(true);
-      if (currentUser !== null) {
+      const localStorage_currentUser = JSON.parse(
+        localStorage.getItem("localStorage_currentUser")
+      );
+      if (localStorage_currentUser !== null) {
         const response = await leetspaceApi.get(
-          `/api/completed/${currentUser?.uid}`
+          `/api/completed/${localStorage_currentUser?.uid}`
         );
         setBankQuestions(response.data);
       }
@@ -29,7 +32,9 @@ const Bank = () => {
   };
 
   useEffect(() => {
-    if (!userLoggedIn) {
+    const localStorage_userLoggedIn =
+      localStorage.getItem("localStorage_userLoggedIn") === "true";
+    if (!localStorage_userLoggedIn) {
       navigate("/login");
     }
   }, [userLoggedIn, navigate]);

@@ -7,7 +7,7 @@ import { signOut } from "firebase/auth";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { userLoggedIn, setUserLoggedIn, currentUser, setCurrentUser } =
+  const { setUserLoggedIn, currentUser, setCurrentUser } =
     useContext(UserContext);
 
   const handleLogout = async () => {
@@ -15,6 +15,8 @@ const Navbar = () => {
       await signOut(auth);
       setUserLoggedIn(false);
       setCurrentUser(null);
+      localStorage.setItem("localStorage_userLoggedIn", "false");
+      localStorage.setItem("localStorage_currentUser", "null");
       navigate("/login");
     } catch (error) {
       console.error("Failed to logout", error.message);
