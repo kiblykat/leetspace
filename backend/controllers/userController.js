@@ -21,7 +21,6 @@ export const getAllUsers = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
-    console.log(`Creating user: ${req.body}`);
     const userExists = await userModel.findOne({ uid: req.body.uid });
     if (!userExists) {
       await userModel.create(req.body);
