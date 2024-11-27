@@ -46,7 +46,9 @@ const Bank = () => {
   return (
     <>
       <div className="container mx-auto my-10 p-6 bg-base-200 rounded shadow-lg flex-col">
-        <h1 className="text-3xl font-bold mb-6 text-center">Revision Bank</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center font-mono">
+          Revision Bank
+        </h1>
         <div className="rounded shadow-lg flex flex-col p-6 ">
           <input
             type="text"

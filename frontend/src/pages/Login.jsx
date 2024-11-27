@@ -47,9 +47,11 @@ const Login = () => {
     <div className="container mx-auto p-6 bg-base-200 rounded shadow-lg flex flex-col justify-center items-center min-h-screen">
       <div className="bg-base-300 m-5 p-24 shadow-2xl rounded-xl flex flex-col justify-center relative">
         <h1 className="text-3xl font-bold mb-2 text-center font-mono">
-          LeetSpace();
+          LeetSpace(beta)
         </h1>
-        <p className="font-mono mb-8">leetcode through repetition</p>
+        <p className="font-mono mb-8">
+          {`{`}leetcode through repetition{`}`};
+        </p>
         <button
           onClick={handleGoogleLogin}
           className="btn bg-orange-200 text-black hover:bg-orange-400"
