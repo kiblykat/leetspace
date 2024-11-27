@@ -21,8 +21,9 @@ const Login = () => {
       localStorage.setItem("localStorage_userLoggedIn", "true");
       localStorage.setItem("localStorage_currentUser", JSON.stringify(user));
       let userExists = await leetspaceApi.get(`/api/users/${user.uid}`);
-      if (!userExists) {
-        await leetspaceApi.post("/api/users", {
+      if (!userExists.data) {
+        console.log("Creating user...");
+        await leetspaceApi.post("/api/users/create", {
           uid: user.uid,
           email: user.email,
           displayName: user.displayName,

@@ -1,10 +1,11 @@
 import { userModel } from "../models/User.js";
 
+//working fine
 export const getUser = async (req, res) => {
   try {
-    const uid = req.params.id;
+    const { uid } = req.params;
     const response = await userModel.findOne({ uid: uid });
-    return res.status(200).json(response);
+    res.status(200).json(response);
   } catch (err) {
     res.status(500).json({ error: `${err}` });
   }
@@ -20,6 +21,7 @@ export const getAllUsers = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
+    console.log(`Creating user: ${req.body}`);
     const userExists = await userModel.findOne({ uid: req.body.uid });
     if (!userExists) {
       await userModel.create(req.body);

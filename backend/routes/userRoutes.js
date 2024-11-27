@@ -9,8 +9,8 @@ const router = express.Router();
 
 //route: /api/users
 
+router.get("/:uid", getUser);
 router.get("/", getAllUsers);
-router.get("/:id", getUser);
-router.post("/", createUser);
+router.post("/create", createUser);
 
 export default router;
