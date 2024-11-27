@@ -3,6 +3,8 @@ import QuestionContext from "../contexts/QuestionContext.jsx";
 import ConfidenceTable from "./ConfidenceTable.jsx";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../contexts/UserContext.jsx";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase/firebase.js";
 
 const QuestionList = () => {
   const [popupVisible, setPopupVisible] = useState(false);
@@ -13,10 +15,14 @@ const QuestionList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const localStorage_currentUser = JSON.parse(
-      localStorage.getItem("localStorage_currentUser")
-    );
-    getDueQuestions(localStorage_currentUser?.uid);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        getDueQuestions(user.uid);
+      } else {
+        // Redirect to login page or handle unauthenticated state
+      }
+    });
+    return () => unsubscribe(); // Cleanup the listener
   }, [selectedQuestionId]);
 
   const openQuestionLink = async (id, link) => {
