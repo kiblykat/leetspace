@@ -26,9 +26,15 @@ const ConfidenceTable = ({
       selectedQuestionId
     );
     // get ID and currentInterval from the selectedQuestionId
+    if (!selectedQuestionId) {
+      console.error("No selectedQuestionId provided");
+      return;
+    }
+
     const currentCompleted = await leetspaceApi.get(
-      `/api/completed/${selectedQuestionId}`
+      `/api/completed/single/${selectedQuestionId}`
     );
+
     const { _id, title, currentInterval } = currentCompleted.data;
 
     let questionToUpdate = {

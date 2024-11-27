@@ -1,15 +1,28 @@
 import { completedModel } from "../models/Completed.js";
 
 // Get a completed by ID
-export const getCompleted = async (req, res) => {
+export const getSingleCompleted = async (req, res) => {
   try {
-    const completed = await completedModel.findById(req.params.id);
-    if (!completed)
+    const id = req.params.id;
+
+    // Query the database
+    const completed = await completedModel.findById(id);
+
+    if (!completed) {
       return res.status(404).json({ error: "completedModel not found" });
+    }
+
     res.json(completed);
   } catch (error) {
-    res.status(500).json({ error: error });
+    console.error(error);
+    return res.status(500).json({ error: error.message });
   }
+};
+
+export const getEverySingleCompleteds = async (req, res) => {
+  console.log("getEverySingleCompleteds");
+  const response = await completedModel.find();
+  res.json(response);
 };
 
 export const getDueCompleteds = async (req, res) => {
@@ -90,7 +103,7 @@ export const getAllCompleteds = async (req, res) => {
 export const updateCompleted = async (req, res) => {
   try {
     let { _id, userRecallDifficulty, currentInterval } = req.body;
-
+    let newInterval = Number(currentInterval);
     //userDifficulty duration percentage multiplier
     switch (userRecallDifficulty) {
       case "Easy":
