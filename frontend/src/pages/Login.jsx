@@ -57,7 +57,7 @@ const Login = () => {
           Sign In with Google
         </button>
       </div>
-      <div className="absolute bottom-0 right-0 p-4 text-gray-500 flex flex-row items-center">
+      <div className="bottom-0 right-0 p-4 text-gray-500 flex flex-row items-center">
         <span className="text-center font-mono">Contact me: </span>
         <a
           href="https://github.com/kiblykat"
