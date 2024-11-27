@@ -13,7 +13,10 @@ const QuestionList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getDueQuestions(currentUser?.uid);
+    const localStorage_currentUser = JSON.parse(
+      localStorage.getItem("localStorage_currentUser")
+    );
+    getDueQuestions(localStorage_currentUser?.uid);
   }, [selectedQuestionId]);
 
   const openQuestionLink = async (id, link) => {

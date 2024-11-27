@@ -10,7 +10,9 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!userLoggedIn) {
+    const localStorage_userLoggedIn =
+      localStorage.getItem("localStorage_userLoggedIn") === "true";
+    if (!localStorage_userLoggedIn) {
       navigate("/login");
     }
   }, [userLoggedIn, navigate]);
