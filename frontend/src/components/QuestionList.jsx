@@ -14,9 +14,6 @@ const QuestionList = () => {
 
   useEffect(() => {
     getDueQuestions(currentUser?.uid);
-    if (currentUser?.uid !== undefined) {
-      console.log("Getting due questions for user with uid:", currentUser.uid);
-    }
   }, [selectedQuestionId]);
 
   const openQuestionLink = async (id, link) => {
