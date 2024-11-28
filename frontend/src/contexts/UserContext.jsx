@@ -1,4 +1,6 @@
 import { createContext, useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase/firebase.js";
 
 const UserContext = createContext();
 
@@ -16,11 +18,15 @@ export const UserProvider = ({ children }) => {
 
   // Load userLoggedIn and currentUser from localStorage, EVERYTIME the component mounts
   useEffect(() => {
-    const loggedIn = localStorage.getItem("userLoggedIn") === "true";
-    const user = JSON.parse(localStorage.getItem("localStorage_currentUser"));
-    setUserLoggedIn(loggedIn);
-    setCurrentUser(user);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserLoggedIn(true);
+        setCurrentUser(user);
+      }
+    });
+    return () => unsubscribe();
   }, []);
+
   return (
     <UserContext.Provider value={context}>{children}</UserContext.Provider>
   );
