@@ -3,6 +3,8 @@ import leetspaceApi from "../api/api";
 import { Navigate, useNavigate } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 import QuestionContext from "../contexts/QuestionContext";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase/firebase";
 
 const Bank = () => {
   const [bankQuestions, setBankQuestions] = useState([]);
@@ -13,18 +15,11 @@ const Bank = () => {
 
   const { loading, setLoading } = useContext(QuestionContext);
 
-  let getRevisionBank = async () => {
+  let getRevisionBank = async (user) => {
     try {
       setLoading(true);
-      const localStorage_currentUser = JSON.parse(
-        localStorage.getItem("localStorage_currentUser")
-      );
-      if (localStorage_currentUser !== null) {
-        const response = await leetspaceApi.get(
-          `/api/completed/${localStorage_currentUser?.uid}`
-        );
-        setBankQuestions(response.data);
-      }
+      const response = await leetspaceApi.get(`/api/completed/${user?.uid}`);
+      setBankQuestions(response.data);
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -32,15 +27,14 @@ const Bank = () => {
   };
 
   useEffect(() => {
-    const localStorage_userLoggedIn =
-      localStorage.getItem("localStorage_userLoggedIn") === "true";
-    if (!localStorage_userLoggedIn) {
-      navigate("/login");
-    }
-  }, [userLoggedIn, navigate]);
-
-  useEffect(() => {
-    getRevisionBank();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        navigate("/login");
+      } else {
+        getRevisionBank(user);
+      }
+      return () => unsubscribe();
+    });
   }, []);
 
   return (

@@ -17,9 +17,6 @@ const Login = () => {
       //set user and userLoggedIn states
       setCurrentUser(user);
       setUserLoggedIn(true);
-      //set localStorage (prevent loss of state on refresh)
-      localStorage.setItem("localStorage_userLoggedIn", "true");
-      localStorage.setItem("localStorage_currentUser", JSON.stringify(user));
       let userExists = await leetspaceApi.get(`/api/users/${user.uid}`);
       if (!userExists.data) {
         console.log("Creating user...");

@@ -15,8 +15,6 @@ const Navbar = () => {
       await signOut(auth);
       setUserLoggedIn(false);
       setCurrentUser(null);
-      localStorage.setItem("localStorage_userLoggedIn", "false");
-      localStorage.setItem("localStorage_currentUser", "null");
       navigate("/login");
     } catch (error) {
       console.error("Failed to logout", error.message);
